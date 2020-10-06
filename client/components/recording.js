@@ -14,11 +14,23 @@ class Recording extends Component {
   startRecord() {
     if (!this.state.recording) {
       console.log('Recording started')
+      this.startVideo()
     } else {
       console.log('Recording ended')
     }
     let currentRecordState = this.state.recording
     this.setState({recording: !currentRecordState})
+  }
+
+  startVideo() {
+    console.log('access')
+    navigator.getUserMedia(
+      {
+        video: {}
+      },
+      stream => (video.srcObject = stream),
+      err => console.error(err)
+    )
   }
   render() {
     const Completionist = () => <span>Show Results</span>
@@ -27,14 +39,18 @@ class Recording extends Component {
         <div>
           <h3>Recording Component</h3>
         </div>
+
         <div>
           {this.state.recording ? (
-            <h3>
-              Time Remaining:
-              <Countdown date={Date.now() + 90000}>
-                <Completionist />
-              </Countdown>{' '}
-            </h3>
+            <div>
+              <video id="video" width="500px" height="400px" autoPlay muted />
+              <h3>
+                Time Remaining:
+                <Countdown date={Date.now() + 90000}>
+                  <Completionist />
+                </Countdown>{' '}
+              </h3>
+            </div>
           ) : null}
         </div>
         <div>
