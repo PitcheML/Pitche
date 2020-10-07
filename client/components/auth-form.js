@@ -13,7 +13,10 @@ const AuthForm = props => {
     <div className="auth__container">
       <Paper elevation={3}>
         <div className="auth">
-          <h1>Pitche</h1>
+          <div className="auth__logo">
+            <img src="logo.png" alt="" />
+          </div>
+
           <form onSubmit={handleSubmit} name={name}>
             <div>
               <label htmlFor="email">
