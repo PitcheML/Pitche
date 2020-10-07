@@ -21,7 +21,8 @@ function Video() {
         faceapi.nets.tinyFaceDetector.loadFromUri(MODELS),
         faceapi.nets.faceLandmark68Net.loadFromUri(MODELS),
         faceapi.nets.faceRecognitionNet.loadFromUri(MODELS),
-        faceapi.nets.faceExpressionNet.loadFromUri(MODELS)
+        faceapi.nets.faceExpressionNet.loadFromUri(MODELS),
+        faceapi.nets.ssdMobilenetv1.loadFromUri(MODELS)
       ])
     }
     loadModels()
@@ -48,6 +49,19 @@ function Video() {
       },
       err => console.error(err)
     )
+    console.log(videostream)
+    setInterval(async function() {
+      if (videostream) {
+        if (videostream.active === true) {
+          const input = document.getElementById('live-video')
+          const results = await faceapi
+            .detectSingleFace(input)
+            .withFaceLandmarks()
+            .withFaceExpressions()
+          console.log(results)
+        }
+      }
+    }, 500)
   }
 
   const stopVideo = () => {
@@ -68,7 +82,7 @@ function Video() {
     <div className="video">
       <div className={isInitialized ? 'video__left' : 'video__left__hidden'}>
         {isInitialized ? (
-          <Countdown date={Date.now() + 100000} daysInHours={true}>
+          <Countdown date={Date.now() + 9000} daysInHours={true}>
             <Completion />
           </Countdown>
         ) : null}
@@ -84,7 +98,7 @@ function Video() {
             isInitialized ? 'video__container' : 'video__container__hidden'
           }
         >
-          <video ref={videoRef} autoPlay muted />
+          <video id="live-video" ref={videoRef} autoPlay muted />
         </div>
       </div>
 
