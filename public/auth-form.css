@@ -1,0 +1,45 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.auth > form {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+
+.auth > form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.auth > form > div > label {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 75%;
+}
+
+.auth > form > div > input {
+  width: 75%;
+  height: 25px;
+}
+
+.auth__container {
+  display: flex;
+  justify-content: center;
+}
+
+.auth__container > .MuiPaper-root {
+  width: 500px;
+  background-color: #292f36;
+}
+
+.auth > h1 {
+  text-align: center;
+}

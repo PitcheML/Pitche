@@ -16,6 +16,7 @@ class Recording extends Component {
       console.log('Recording started')
       this.startVideo()
     } else {
+      this.stopVideo()
       console.log('Recording ended')
     }
     let currentRecordState = this.state.recording
@@ -26,13 +27,31 @@ class Recording extends Component {
     console.log('access')
     navigator.getUserMedia(
       {
-        video: {}
+        video: true
       },
       stream => (video.srcObject = stream),
       err => console.error(err)
     )
   }
+
+  stopVideo() {
+    console.log('trying to stop')
+    navigator.getUserMedia(
+      {
+        video: true
+      },
+      stream => {
+        console.log('we are inside', stream.getVideoTracks())
+        let track = stream.getVideoTracks()[0]
+        track.stop()
+        console.log('this the track, ', track)
+      },
+      err => console.error(err)
+    )
+  }
+
   render() {
+    console.log('THIS IS THIS --->', this)
     const Completionist = () => <span>Show Results</span>
     return (
       <React.Fragment>
