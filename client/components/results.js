@@ -29,6 +29,9 @@ class Results extends Component {
               Disgusted:{' '}
               {(mostRecentEmotionalAnalysis.disgusted * 100).toFixed(2)}%
             </h2>
+            <h2>
+              Fearful: {(mostRecentEmotionalAnalysis.fearful * 100).toFixed(2)}%
+            </h2>
           </div>
         ) : null}
       </div>
