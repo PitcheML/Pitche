@@ -10,7 +10,9 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>
+        Welcome, click above to see your previous pitches or record a new one
+      </h3>
     </div>
   )
 }
