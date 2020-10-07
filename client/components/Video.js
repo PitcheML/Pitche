@@ -5,6 +5,19 @@ import {Redirect} from 'react-router-dom'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 
 let videostream
+const dataTimer = 100
+const totalVideoTime = 10000
+const totalIntervals = totalVideoTime / dataTimer
+
+const emotions = {
+  sad: 0,
+  angry: 0,
+  neutral: 0,
+  surprised: 0,
+  happy: 0,
+  disgusted: 0,
+  fearful: 0
+}
 
 function Video() {
   const VIDEO_HEIGHT = 480
@@ -58,15 +71,36 @@ function Video() {
             .detectSingleFace(input)
             .withFaceLandmarks()
             .withFaceExpressions()
-          console.log(results)
+          if (results) {
+            const emotionalResults = Object.keys(results.expressions).reduce(
+              (a, b) =>
+                results.expressions[a] > results.expressions[b] ? a : b
+            )
+            emotions[emotionalResults]++
+          }
         }
       }
-    }, 500)
+    }, dataTimer)
   }
 
   const stopVideo = () => {
     setInitialized(false)
     videostream.getTracks()[0].stop()
+    console.log('emotional breakdown', emotions)
+    const totalEmotions = Object.values(emotions).reduce(
+      (accum, curElm) => accum + curElm,
+      0
+    )
+    const emotionsPercentage = {
+      sad: emotions.sad / totalEmotions,
+      angry: emotions.angry / totalEmotions,
+      neutral: emotions.neutral / totalEmotions,
+      surprised: emotions.surprised / totalEmotions,
+      happy: emotions.happy / totalEmotions,
+      disgusted: emotions.disgusted / totalEmotions,
+      fearful: emotions.fearful / totalEmotions
+    }
+    console.log('emotion percentage', emotionsPercentage)
   }
 
   const Completion = () => {
@@ -82,7 +116,7 @@ function Video() {
     <div className="video">
       <div className={isInitialized ? 'video__left' : 'video__left__hidden'}>
         {isInitialized ? (
-          <Countdown date={Date.now() + 9000} daysInHours={true}>
+          <Countdown date={Date.now() + totalVideoTime} daysInHours={true}>
             <Completion />
           </Countdown>
         ) : null}
