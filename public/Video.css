@@ -58,7 +58,7 @@
   height: 500px;
 }
 
-.rec {
+/* .rec {
   animation-name: pulse;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
@@ -75,4 +75,4 @@
   90% {
     box-shadow: 0px 0px 5px 13px rgba(173, 0, 0, 0);
   }
-}
+} */

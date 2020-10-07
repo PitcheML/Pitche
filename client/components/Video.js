@@ -3,6 +3,8 @@ import * as faceapi from 'face-api.js'
 import Countdown from 'react-countdown'
 import {Redirect} from 'react-router-dom'
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
+import {connect} from 'react-redux'
+import {setEmotions} from '../store/emotion'
 
 let videostream
 const dataTimer = 100
@@ -19,7 +21,7 @@ const emotions = {
   fearful: 0
 }
 
-function Video() {
+function Video({setEmotion}) {
   const VIDEO_HEIGHT = 480
   const VIDEO_WIDTH = 640
 
@@ -101,6 +103,7 @@ function Video() {
       fearful: emotions.fearful / totalEmotions
     }
     console.log('emotion percentage', emotionsPercentage)
+    setEmotion(emotionsPercentage)
   }
 
   const Completion = () => {
@@ -142,5 +145,11 @@ function Video() {
     </div>
   )
 }
+const mapState = () => {
+  return {}
+}
+const mapDispatchToState = dispatch => {
+  return {setEmotion: emotionObj => dispatch(setEmotions(emotionObj))}
+}
 
-export default Video
+export default connect(mapState, mapDispatchToState)(Video)
