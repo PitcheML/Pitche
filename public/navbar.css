@@ -1,0 +1,56 @@
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar__left {
+  display: flex;
+}
+
+.navbar__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__links > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__links > a > .MuiSvgIcon-root {
+  margin-left: 6px;
+  font-size: 20px !important;
+  color: #3d52d5;
+}
+
+.navbar__right__acc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__right__acc > a {
+  margin-left: 8px;
+}
+
+.navbar__right {
+  display: flex;
+}
+
+.navbar__links__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar__links__right > a {
+  margin-right: 4px;
+}
+
+.navbar__links__right > .MuiSvgIcon-root {
+  font-size: 20px !important;
+  color: #3d52d5;
+  margin-right: 10px;
+}
