@@ -1,47 +1,98 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {bar, bb, pie} from 'billboard.js'
 
 class Results extends Component {
-  render() {
-    console.log('this is our props -->', this.props)
+  constructor(props) {
+    super(props)
+    this.createCharts = this.createCharts.bind(this)
+  }
+
+  componentDidMount() {
+    this.createCharts()
+  }
+
+  componentDidUpdate() {
+    this.createCharts()
+  }
+
+  createCharts() {
     const emotions = this.props.emotion
-    const mostRecentEmotionalAnalysis = emotions[emotions.length - 1]
+    const recentResult = emotions[emotions.length - 1]
+    bb.generate({
+      data: {
+        columns: [
+          ['Angry', recentResult.angry],
+          ['Disgusted', recentResult.disgusted],
+          ['Fearful', recentResult.fearful],
+          ['Happy', recentResult.happy],
+          ['Neutral', recentResult.neutral],
+          ['Sad', recentResult.sad],
+          ['Surprised', recentResult.surprised]
+        ],
+        type: pie(),
+        labels: true,
+        colors: {
+          Angry: '#060760',
+          Disgusted: '#090C9B',
+          Fearful: '#3D52D5',
+          Happy: '#6878DE',
+          Neutral: '#B4C5E4',
+          Sad: '#D2DCEF',
+          Surprised: '#FBFFF1'
+        }
+      },
+      size: {
+        height: 500
+      },
+      padding: {
+        left: 250,
+        right: 250
+      },
+      bindto: '#pieChart'
+    })
+    bb.generate({
+      data: {
+        columns: [
+          ['Angry', (recentResult.angry * 100).toFixed(2)],
+          ['Disgusted', (recentResult.disgusted * 100).toFixed(2)],
+          ['Fearful', (recentResult.fearful * 100).toFixed(2)],
+          ['Happy', (recentResult.happy * 100).toFixed(2)],
+          ['Neutral', (recentResult.neutral * 100).toFixed(2)],
+          ['Sad', (recentResult.sad * 100).toFixed(2)],
+          ['Surprised', (recentResult.surprised * 100).toFixed(2)]
+        ],
+        type: bar(),
+        labels: true,
+        colors: {
+          Angry: '#060760',
+          Disgusted: '#090C9B',
+          Fearful: '#3D52D5',
+          Happy: '#6878DE',
+          Neutral: '#B4C5E4',
+          Sad: '#D2DCEF',
+          Surprised: '#FBFFF1'
+        }
+      },
+      size: {
+        height: 500
+      },
+      padding: {
+        left: 250,
+        right: 250
+      },
+      bindto: '#barChart'
+    })
+  }
+
+  render() {
     return (
       <div>
-        {emotions.length > 0 ? (
-          <React.Fragment>
-            <h1>Results:</h1>
-            <div>
-              <h2>
-                Sad: {(mostRecentEmotionalAnalysis.sad * 100).toFixed(2)}%
-              </h2>
-              <h2>
-                Angry: {(mostRecentEmotionalAnalysis.angry * 100).toFixed(2)}%
-              </h2>
-              <h2>
-                Neutral:{' '}
-                {(mostRecentEmotionalAnalysis.neutral * 100).toFixed(2)}%
-              </h2>
-              <h2>
-                Surprised:{' '}
-                {(mostRecentEmotionalAnalysis.surprised * 100).toFixed(2)}%
-              </h2>
-              <h2>
-                Happy: {(mostRecentEmotionalAnalysis.happy * 100).toFixed(2)}%
-              </h2>
-              <h2>
-                Disgusted:{' '}
-                {(mostRecentEmotionalAnalysis.disgusted * 100).toFixed(2)}%
-              </h2>
-              <h2>
-                Fearful:{' '}
-                {(mostRecentEmotionalAnalysis.fearful * 100).toFixed(2)}%
-              </h2>
-            </div>
-          </React.Fragment>
-        ) : (
-          <h4>None</h4>
-        )}
+        <h2>Your Pitch Video Results:</h2>
+        <div className-="results-charts">
+          <div id="pieChart" className="charts" />
+          <div id="barChart" className="charts" />
+        </div>
       </div>
     )
   }

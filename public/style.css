@@ -22,3 +22,16 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.results-charts {
+  display: flex;
+  flex-direction: row;
+}
+
+.charts {
+  flex: 1;
+}
+
+.charts:first-child {
+  margin-right: 20px;
+}
