@@ -13,6 +13,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/home">Home</Link>
           <Link to="/video">Record New Pitch</Link>
           <Link to="/results">Last Pitch Analysis</Link>
+          <Link to="/history">Pitch History</Link>
           <a href="#" onClick={handleClick}>
             Logout
           </a>

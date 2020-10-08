@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as faceapi from 'face-api.js'
-import {setEmotions} from '../store/emotion'
+import {setEmotionsInDb} from '../store/emotion'
 import Countdown from 'react-countdown'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
 import {HistoryOutlined} from '@material-ui/icons'
@@ -34,7 +34,8 @@ class VideoFeed extends Component {
     this.state = {
       isInitialized: false,
       isRecording: false,
-      isProcessing: false
+      isProcessing: false,
+      emotionSet: false
     }
     this.stopVideo = this.stopVideo.bind(this)
     this.onVideoPlay = this.onVideoPlay.bind(this)
@@ -52,7 +53,10 @@ class VideoFeed extends Component {
   }
 
   componentWillUnmount() {
-    this.stopVideo()
+    if (videostream) {
+      videostream.getTracks()[0].stop()
+    }
+    videostream = null
   }
 
   startProcessing = () => {
@@ -96,7 +100,10 @@ class VideoFeed extends Component {
       fearful: emotions.fearful / totalEmotions
     }
     console.log('emotion percentage', emotionsPercentage)
+    console.log('emotion set?', this.state)
+
     this.props.setEmotion(emotionsPercentage)
+
     console.log('this is the state --->', this.state)
     this.setState({
       isInitialized: false,
@@ -197,7 +204,7 @@ const mapState = () => {
   return {}
 }
 const mapDispatchToState = dispatch => {
-  return {setEmotion: emotionObj => dispatch(setEmotions(emotionObj))}
+  return {setEmotion: emotionObj => dispatch(setEmotionsInDb(emotionObj))}
 }
 
 export default connect(mapState, mapDispatchToState)(VideoFeed)
