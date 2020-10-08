@@ -7,7 +7,7 @@ class Results extends Component {
     const emotions = this.props.emotion
     const mostRecentEmotionalAnalysis = emotions[emotions.length - 1]
     return (
-      <div>
+      <div className="results">
         {emotions.length > 0 ? (
           <React.Fragment>
             <h1>Results:</h1>
