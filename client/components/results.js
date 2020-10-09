@@ -8,17 +8,11 @@ class Results extends Component {
     this.createCharts = this.createCharts.bind(this)
   }
 
-  componentDidMount() {
-    this.createCharts()
-  }
-
-  componentDidUpdate() {
-    this.createCharts()
-  }
-
   createCharts() {
+    console.log('these are the emotions--->', this)
     const emotions = this.props.emotion
     const recentResult = emotions[emotions.length - 1]
+    console.log('these are the recent results ---->', recentResult)
     bb.generate({
       data: {
         columns: [
@@ -86,14 +80,24 @@ class Results extends Component {
   }
 
   render() {
+    if (this.props.emotion.length > 0) {
+      this.createCharts()
+    }
+
+    console.log('these are the props ----> ', this)
     return (
       <div>
-        <h2>Your Pitch Video Results:</h2>
-        <div className-="results-charts">
-          <div id="pieChart" className="charts" />
-          <div id="barChart" className="charts" />
-        </div>
-
+        {this.props.emotion.length > 0 ? (
+          <React.Fragment>
+            <h2>Your Pitch Video Results:</h2>
+            <div className="results-charts">
+              <div id="pieChart" className="charts" />
+              <div id="barChart" className="charts" />
+            </div>
+          </React.Fragment>
+        ) : (
+          <h4>none</h4>
+        )}
       </div>
     )
   }
