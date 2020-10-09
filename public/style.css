@@ -3,6 +3,8 @@
 @import 'app.css';
 @import 'results.css';
 @import 'navbar.css';
+@import 'History.css';
+
 body {
   font-family: sans-serif;
   overflow: hidden;
