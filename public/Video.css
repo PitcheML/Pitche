@@ -1,6 +1,7 @@
 .video {
   display: flex;
   flex-direction: column;
+  padding: 20px;
 }
 
 .video__loading {
@@ -13,6 +14,10 @@
   align-items: center;
   margin-top: 900px;
   font-size: 30px;
+}
+
+.video__container > video {
+  border: 1px solid white;
 }
 
 .video__loading > .MuiSvgIcon-root {
