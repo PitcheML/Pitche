@@ -1,7 +1,7 @@
 import {Divider} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {bar, bb, pie} from 'billboard.js'
+import {bar, bb, pie, donut} from 'billboard.js'
 
 class HistoryCard extends Component {
   constructor(props) {
@@ -19,42 +19,47 @@ class HistoryCard extends Component {
     const {emotion} = this.props
     console.log('these are the emotions--->', emotion)
 
-    bb
-      .generate({
-        data: {
-          columns: [
-            ['Angry', emotion.angry],
-            ['Disgusted', emotion.disgusted],
-            ['Fearful', emotion.fearful],
-            ['Happy', emotion.happy],
-            ['Neutral', emotion.neutral],
-            ['Sad', emotion.sad],
-            ['Surprised', emotion.surprised]
-          ],
-          type: pie(),
-          labels: false,
+    let chart = bb.generate({
+      data: {
+        columns: [
+          ['Angry', emotion.angry],
+          ['Disgusted', emotion.disgusted],
+          ['Fearful', emotion.fearful],
+          ['Happy', emotion.happy],
+          ['Neutral', emotion.neutral],
+          ['Sad', emotion.sad],
+          ['Surprised', emotion.surprised]
+        ],
+        type: pie(),
+        label: {
+          show: true
+        },
+        colors: {
+          Angry: '#060760',
+          Disgusted: '#090C9B',
+          Fearful: '#3D52D5',
+          Happy: '#6878DE',
+          Neutral: '#B4C5E4',
+          Sad: '#D2DCEF',
+          Surprised: '#FBFFF1'
+        }
+      },
+      size: {
+        height: 350
+      },
+      padding: {
+        top: 30,
+        left: 250,
+        right: 250
+      },
 
-          colors: {
-            Angry: '#060760',
-            Disgusted: '#090C9B',
-            Fearful: '#3D52D5',
-            Happy: '#6878DE',
-            Neutral: '#B4C5E4',
-            Sad: '#D2DCEF',
-            Surprised: '#FBFFF1'
-          }
-        },
-        size: {
-          height: 300
-        },
-        padding: {
-          left: 250,
-          right: 250
-        },
+      bindto: `#pieChart${emotion.id}`
+    })
+    console.log('this is the chart ---->', chart)
 
-        bindto: `#pieChart${emotion.id}`
-      })
-      .legend.hide()
+    console.dir(Object.keys(chart))
+
+    chart.legend.hide()
   }
 
   render() {
