@@ -1,11 +1,16 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bar, bb, pie} from 'billboard.js'
+import {fetchEmotions} from '../store/emotion'
 
 class Results extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.createCharts = this.createCharts.bind(this)
+  }
+  async componentDidMount() {
+    await this.props.getEmotions()
+    this.createCharts()
   }
 
   createCharts() {
@@ -80,10 +85,6 @@ class Results extends Component {
   }
 
   render() {
-    if (this.props.emotion.length > 0) {
-      this.createCharts()
-    }
-
     console.log('these are the props ----> ', this)
     return (
       <div>
@@ -109,4 +110,10 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(Results)
+const mapDispatchToProps = dispatch => {
+  return {
+    getEmotions: () => dispatch(fetchEmotions())
+  }
+}
+
+export default connect(mapState, mapDispatchToProps)(Results)

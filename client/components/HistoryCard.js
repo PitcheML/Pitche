@@ -1,8 +1,22 @@
 import {Divider} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {bar, bb, pie} from 'billboard.js'
 
 class HistoryCard extends Component {
+  constructor() {
+    super()
+    this.createCharts = this.createCharts.bind(this)
+  }
+
+  componentDidMount() {
+    this.createCharts()
+  }
+
+  componentDidUpdate() {
+    this.createCharts()
+  }
+
   render() {
     const {emotion} = this.props
     const {createdAt} = emotion
