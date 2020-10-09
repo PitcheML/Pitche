@@ -17,6 +17,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div className="navbar__container">
           {/* The navbar will show these links after you log in */}
+
           <div className="navbar__left">
             <div className="navbar__links">
               <Link to="/home">
@@ -31,6 +32,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <div className="navbar__links">
               <Link to="/results">
                 Last Pitch Analysis <AssessmentIcon />
+              </Link>
+            </div>
+              <div className="navbar__links">
+              <Link to="/history">
+                Pitch History <AssessmentIcon />
               </Link>
             </div>
           </div>
