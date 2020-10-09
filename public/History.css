@@ -1,0 +1,26 @@
+.history {
+  display: flex;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.history__container {
+  margin: 10px;
+  flex: 1;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+}
+
+.history__card {
+  padding: 10px;
+  border: 1px solid black;
+  margin: 10px;
+}
+
+.history__card > h1 {
+  margin: 0;
+  text-align: center;
+  border-bottom: 1px solid black;
+}

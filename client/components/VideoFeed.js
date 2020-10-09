@@ -72,8 +72,10 @@ class VideoFeed extends Component {
       },
       stream => {
         let video = document.getElementsByClassName('videoFeed__video')[0]
-        video.srcObject = stream
-        videostream = stream
+        if (video) {
+          video.srcObject = stream
+          videostream = stream
+        }
       },
       err => console.error(err)
     )
