@@ -93,6 +93,7 @@ class Results extends Component {
           <div id="pieChart" className="charts" />
           <div id="barChart" className="charts" />
         </div>
+
       </div>
     )
   }

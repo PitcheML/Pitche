@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
 
 /**
  * COMPONENT
@@ -33,7 +34,12 @@ const AuthForm = props => {
             <div>
               <button type="submit">{displayName}</button>
             </div>
-            {error && error.response && <div> {error.response.data} </div>}
+            <div>
+              {error &&
+                error.response && (
+                  <div className="auth__error"> {error.response.data} </div>
+                )}
+            </div>
           </form>
           {/* <a href="/auth/google">{displayName} with Google</a> */}
         </div>

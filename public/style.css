@@ -1,8 +1,16 @@
 @import 'Video.css';
 @import 'auth-form.css';
 @import 'app.css';
+@import 'results.css';
+@import 'navbar.css';
 body {
   font-family: sans-serif;
+  overflow: hidden;
+  background-image: url('trianglify-lowres.png');
+  background-size: 2000px 1000px;
+  background-repeat: no-repeat;
+  color: white;
+  margin: 0px;
 }
 
 a {
@@ -13,9 +21,15 @@ label {
   display: block;
 }
 
+nav {
+  background-color: white;
+  border: 1px solid black;
+}
+
 nav a {
   display: inline-block;
   margin: 1em;
+  color: blue;
 }
 
 form div {
