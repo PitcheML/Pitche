@@ -42,6 +42,7 @@ form div {
 .results-charts {
   display: flex;
   flex-direction: row;
+  background-color: lightgray;
 }
 
 .charts {

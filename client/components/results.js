@@ -33,6 +33,9 @@ class Results extends Component {
         label: {
           show: true
         },
+        labels: {
+          colors: 'black'
+        },
         colors: {
           Angry: '#060760',
           Disgusted: '#090C9B',
