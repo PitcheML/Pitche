@@ -1,20 +1,65 @@
 import {Divider} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {bar, bb, pie} from 'billboard.js'
+import {bar, bb, pie, donut} from 'billboard.js'
 
 class HistoryCard extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.createCharts = this.createCharts.bind(this)
+    this.count = 0
   }
 
   componentDidMount() {
+    console.log('firing off')
     this.createCharts()
   }
 
-  componentDidUpdate() {
-    this.createCharts()
+  createCharts() {
+    const {emotion} = this.props
+    console.log('these are the emotions--->', emotion)
+
+    let chart = bb.generate({
+      data: {
+        columns: [
+          ['Angry', emotion.angry],
+          ['Disgusted', emotion.disgusted],
+          ['Fearful', emotion.fearful],
+          ['Happy', emotion.happy],
+          ['Neutral', emotion.neutral],
+          ['Sad', emotion.sad],
+          ['Surprised', emotion.surprised]
+        ],
+        type: pie(),
+        label: {
+          show: true
+        },
+        colors: {
+          Angry: '#060760',
+          Disgusted: '#090C9B',
+          Fearful: '#3D52D5',
+          Happy: '#6878DE',
+          Neutral: '#B4C5E4',
+          Sad: '#D2DCEF',
+          Surprised: '#FBFFF1'
+        }
+      },
+      size: {
+        height: 350
+      },
+      padding: {
+        top: 30,
+        left: 250,
+        right: 250
+      },
+
+      bindto: `#pieChart${emotion.id}`
+    })
+    console.log('this is the chart ---->', chart)
+
+    console.dir(Object.keys(chart))
+
+    chart.legend.hide()
   }
 
   render() {
@@ -28,19 +73,7 @@ class HistoryCard extends Component {
     return (
       <div className="history__card" key={emotion.id}>
         <h1>{`${month}/${day}/${year}`}</h1>
-        <img
-          src="https://lh3.googleusercontent.com/g0Jw-I6-gH2DVCpnl3u8QKZVT_meR9lcJlpyeSZ-MyvwLnyEZvgyrY5frldA8HCv55s=w280-rwa"
-          alt="pie chart"
-        />
-        {/* <div>
-          <h2>Sad: {(emotion.sad * 100).toFixed(2)}%</h2>
-          <h2>Angry: {(emotion.angry * 100).toFixed(2)}%</h2>
-          <h2>Neutral: {(emotion.neutral * 100).toFixed(2)}%</h2>
-          <h2>Surprised: {(emotion.surprised * 100).toFixed(2)}%</h2>
-          <h2>Happy: {(emotion.happy * 100).toFixed(2)}%</h2>
-          <h2>Disgusted: {(emotion.disgusted * 100).toFixed(2)}%</h2>
-          <h2>Fearful: {(emotion.fearful * 100).toFixed(2)}%</h2>
-        </div> */}
+        <div id={`pieChart${emotion.id}`} className="charts" />
       </div>
     )
   }

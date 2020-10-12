@@ -30,7 +30,12 @@ class Results extends Component {
           ['Surprised', recentResult.surprised]
         ],
         type: pie(),
-        labels: true,
+        label: {
+          show: true
+        },
+        labels: {
+          colors: 'black'
+        },
         colors: {
           Angry: '#060760',
           Disgusted: '#090C9B',

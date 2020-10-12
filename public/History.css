@@ -11,16 +11,31 @@
   background-color: white;
   border: 1px solid black;
   display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
 }
 
 .history__card {
   padding: 10px;
   border: 1px solid black;
   margin: 10px;
+  background-color: #efeff0;
 }
 
 .history__card > h1 {
   margin: 0;
   text-align: center;
   border-bottom: 1px solid black;
+}
+
+.history__card > div > svg > g > g > g > g > text {
+  display: none;
+}
+
+.history__card > div > svg > .bb-legend {
+  display: none;
+}
+
+.history__card > div > svg {
+  height: 250px;
 }
