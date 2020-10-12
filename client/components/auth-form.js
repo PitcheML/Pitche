@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {auth} from '../store'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
+import GoogleButton from 'react-google-button'
 
 /**
  * COMPONENT
@@ -35,13 +36,39 @@ const AuthForm = props => {
               <button type="submit">{displayName}</button>
             </div>
             <div>
+              <a
+                style={{
+                  width: '100%',
+                  margin: 'auto',
+                  height: '2.5rem',
+                  borderRadius: '4px',
+                  paddingLeft: '2px',
+                  paddingTop: '1px',
+                  paddingBottom: '1px'
+                }}
+                href="/auth/google"
+              >
+                <GoogleButton
+                  type="light"
+                  style={{
+                    width: '100%',
+                    margin: 'auto',
+                    height: '2.5rem',
+                    borderRadius: '4px',
+                    paddingLeft: '2px',
+                    paddingTop: '1px',
+                    paddingBottom: '1px'
+                  }}
+                />
+              </a>
+            </div>
+            <div>
               {error &&
                 error.response && (
                   <div className="auth__error"> {error.response.data} </div>
                 )}
             </div>
           </form>
-          {/* <a href="/auth/google">{displayName} with Google</a> */}
         </div>
       </Paper>
     </div>
