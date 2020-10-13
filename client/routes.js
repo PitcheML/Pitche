@@ -9,7 +9,8 @@ import {
   Video,
   Results,
   VideoFeed,
-  History
+  History,
+  SinglePitch
 } from './components'
 import {me} from './store'
 
@@ -31,7 +32,9 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/video" component={VideoFeed} />
         <Route path="/results" component={Results} />
-        <Route path="/history" component={History} />
+        <Route exact path="/history" component={History} />
+        <Route path="/history/:pitchId" component={SinglePitch} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

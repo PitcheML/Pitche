@@ -2,6 +2,7 @@ import {Divider} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import SimplePiceChart from './SimplePieChart'
+import {Link} from 'react-router-dom'
 
 class HistoryCard extends Component {
   constructor() {
@@ -39,7 +40,9 @@ class HistoryCard extends Component {
     return (
       <div className="history__card" key={emotion.id}>
         <h1>{`${month}/${day}/${year}`}</h1>
-        <SimplePiceChart data={this.getData()} />
+        <Link to={`/history/${emotion.id}`}>
+          <SimplePiceChart data={this.getData()} />
+        </Link>
       </div>
     )
   }
