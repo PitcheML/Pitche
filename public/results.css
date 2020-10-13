@@ -1,4 +1,59 @@
 .results {
   padding: 20px;
   padding-top: 0px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  height: 400px;
+}
+
+.results > .MuiPaper-root > h2 {
+  margin-top: 10px;
+  border-bottom: 1px solid #000;
+}
+
+.results > .MuiPaper-root {
+  padding: 10px;
+  height: 750px;
+  overflow-y: scroll;
+}
+
+.MuiPaper-root::-webkit-scrollbar {
+  display: none;
+}
+
+.results > .MuiPaper-root > .results-charts > #barChart > svg > .bb-main {
+  display: flex;
+  width: 500px;
+}
+
+.results__charts {
+  display: flex;
+  height: inherit;
+}
+
+.results__charts__left {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.results__charts__left > #pieChart {
+  flex: 1;
+  height: 100%;
+}
+
+.results__chart__inner {
+  height: 75%;
+  margin-bottom: 10px;
+}
+
+.results__charts__left > .MuiPaper-root {
+  margin-bottom: 10px;
+  padding-top: 10px;
+  border: 1px solid lightgray;
+}
+
+.results__charts__right {
+  flex: 0.5;
 }

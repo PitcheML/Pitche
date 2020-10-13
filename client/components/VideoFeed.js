@@ -22,6 +22,9 @@ const dataTimer = 100
 const totalVideoTime = 10000
 const totalIntervals = totalVideoTime / dataTimer
 
+let audiostream
+let output_result = ''
+
 const Completion = ({stopVideo, self}) => {
   stopVideo()
   self.props.history.push('/results')
@@ -35,6 +38,7 @@ class VideoFeed extends Component {
       isInitialized: false,
       isRecording: false,
       isProcessing: false,
+      isListening: false,
       emotionSet: false
     }
     this.stopVideo = this.stopVideo.bind(this)
@@ -57,14 +61,64 @@ class VideoFeed extends Component {
       videostream.getTracks()[0].stop()
     }
     videostream = null
+    audiostream.stop()
+    this.setState({isListening: false})
+  }
+
+  handleListen = () => {
+    const {isListening} = this.state
+
+    let output_transcript
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition
+    const mic = new SpeechRecognition()
+    audiostream = mic
+
+    mic.continuous = true
+    mic.interimResults = true
+    mic.lang = 'en-US'
+
+    if (isListening) {
+      mic.start()
+      mic.onend = () => {
+        mic.start()
+      }
+    } else {
+      mic.stop()
+      mic.onend = () => {
+        console.log('Stopped Mic on Click')
+      }
+    }
+    mic.onstart = () => {
+      console.log('Mics on')
+    }
+    mic.onresult = event => {
+      const transcript = Array.from(event.results)
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+      output_transcript = transcript
+      output_result = transcript
+      mic.onerror = event => {
+        console.log(event.error)
+      }
+    }
+    mic.onend = () => {
+      console.log('Mic Stop')
+      console.log('returning ----> ', output_transcript)
+    }
+    this.setState({isListening: false})
   }
 
   startProcessing = () => {
+    console.log('start processinggg...')
     this.setState({isProcessing: true})
+    this.handleListen()
   }
 
   startVideo = () => {
-    this.setState({isInitialized: true})
+    this.setState({isInitialized: true, isListening: true})
     console.log('video starting up....')
     navigator.getUserMedia(
       {
@@ -83,6 +137,8 @@ class VideoFeed extends Component {
   }
 
   stopVideo = () => {
+    console.log('attempting stop')
+    audiostream.stop()
     if (videostream) {
       videostream.getTracks()[0].stop()
     }
@@ -92,6 +148,8 @@ class VideoFeed extends Component {
       (accum, curElm) => accum + curElm,
       0
     )
+
+    console.log('this is the results ---->', output_result)
     const emotionsPercentage = {
       sad: emotions.sad / totalEmotions,
       angry: emotions.angry / totalEmotions,
@@ -99,7 +157,8 @@ class VideoFeed extends Component {
       surprised: emotions.surprised / totalEmotions,
       happy: emotions.happy / totalEmotions,
       disgusted: emotions.disgusted / totalEmotions,
-      fearful: emotions.fearful / totalEmotions
+      fearful: emotions.fearful / totalEmotions,
+      transcript: output_result
     }
     console.log('emotion percentage', emotionsPercentage)
     console.log('emotion set?', this.state)
@@ -110,7 +169,8 @@ class VideoFeed extends Component {
     this.setState({
       isInitialized: false,
       isRecording: false,
-      isProcessing: false
+      isProcessing: false,
+      isListening: false
     })
   }
 

@@ -7,7 +7,6 @@
 
 body {
   font-family: sans-serif;
-  overflow: hidden;
   background-image: url('trianglify-lowres.png');
   background-size: 2000px 1000px;
   background-repeat: no-repeat;

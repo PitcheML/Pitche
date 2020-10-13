@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {bar, bb, pie} from 'billboard.js'
+import {bar, bb, pie, donut, radar} from 'billboard.js'
 import {fetchEmotions} from '../store/emotion'
+import Paper from '@material-ui/core/Paper'
 
 class Results extends Component {
   constructor() {
@@ -47,11 +48,7 @@ class Results extends Component {
         }
       },
       size: {
-        height: 500
-      },
-      padding: {
-        left: 250,
-        right: 250
+        height: 250
       },
       bindto: '#pieChart'
     })
@@ -79,11 +76,7 @@ class Results extends Component {
         }
       },
       size: {
-        height: 500
-      },
-      padding: {
-        left: 250,
-        right: 250
+        height: 350
       },
       bindto: '#barChart'
     })
@@ -92,14 +85,31 @@ class Results extends Component {
   render() {
     console.log('these are the props ----> ', this)
     return (
-      <div>
+      <div className="results">
         {this.props.emotion.length > 0 ? (
           <React.Fragment>
-            <h2>Your Pitch Video Results:</h2>
-            <div className="results-charts">
-              <div id="pieChart" className="charts" />
-              <div id="barChart" className="charts" />
-            </div>
+            <Paper elevation={5}>
+              <h2>Your Most Recent Analysis:</h2>
+              <div className="results__charts">
+                <div className="results__charts__left">
+                  <Paper elevation={4}>
+                    <div className="results__chart__inner">
+                      <div id="pieChart" className="charts" />
+                    </div>
+                  </Paper>
+                  <Paper elevation={4}>
+                    <div className="results__chart__inner">
+                      <div id="barChart" className="charts" />
+                    </div>
+                  </Paper>
+                </div>
+                {/* <div className="results__charts__right">
+                  <Paper elevation={4}>
+                    <h4>I am results</h4>
+                  </Paper>
+                </div> */}
+              </div>
+            </Paper>
           </React.Fragment>
         ) : (
           <h4>none</h4>
