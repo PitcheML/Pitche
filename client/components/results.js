@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {bar, bb, pie} from 'billboard.js'
+import {bar, bb, pie, donut, radar} from 'billboard.js'
 import {fetchEmotions} from '../store/emotion'
+import Paper from '@material-ui/core/Paper'
 import TwoLevelPieChart from './TwoLevelPieChart'
 
 class Results extends Component {
@@ -16,13 +17,9 @@ class Results extends Component {
   getData() {
     const emotions = this.props.emotion
     const recentResult = emotions[emotions.length - 1]
-
     const data = [
       {name: 'Angry', value: recentResult.angry},
-      {
-        name: 'Disgusted',
-        value: recentResult.disgusted
-      },
+      {name: 'Disgusted', value: recentResult.disgusted},
       {name: 'Fearful', value: recentResult.fearful},
       {name: 'Happy', value: recentResult.happy},
       {name: 'Neutral', value: recentResult.neutral},
@@ -36,11 +33,10 @@ class Results extends Component {
   render() {
     console.log('these are the props ----> ', this)
     return (
-      <div>
+      <div className="results">
         {this.props.emotion.length > 0 ? (
           <React.Fragment>
             <h2>Your Pitch Video Results:</h2>
-
             <TwoLevelPieChart data={this.getData()} />
           </React.Fragment>
         ) : (

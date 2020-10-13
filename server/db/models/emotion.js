@@ -22,6 +22,9 @@ const Emotion = db.define('emotion', {
   },
   fearful: {
     type: Sequelize.FLOAT
+  },
+  transcript: {
+    type: Sequelize.TEXT
   }
 })
 
