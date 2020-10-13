@@ -1,65 +1,32 @@
 import {Divider} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {bar, bb, pie, donut} from 'billboard.js'
+import SimplePiceChart from './SimplePieChart'
 
 class HistoryCard extends Component {
-  constructor(props) {
-    super(props)
-    this.createCharts = this.createCharts.bind(this)
-    this.count = 0
+  constructor() {
+    super()
+    this.getData = this.getData.bind(this)
   }
 
-  componentDidMount() {
-    console.log('firing off')
-    this.createCharts()
-  }
-
-  createCharts() {
+  getData() {
     const {emotion} = this.props
-    console.log('these are the emotions--->', emotion)
+    console.log('emotion', emotion)
 
-    let chart = bb.generate({
-      data: {
-        columns: [
-          ['Angry', emotion.angry],
-          ['Disgusted', emotion.disgusted],
-          ['Fearful', emotion.fearful],
-          ['Happy', emotion.happy],
-          ['Neutral', emotion.neutral],
-          ['Sad', emotion.sad],
-          ['Surprised', emotion.surprised]
-        ],
-        type: pie(),
-        label: {
-          show: true
-        },
-        colors: {
-          Angry: '#060760',
-          Disgusted: '#090C9B',
-          Fearful: '#3D52D5',
-          Happy: '#6878DE',
-          Neutral: '#B4C5E4',
-          Sad: '#D2DCEF',
-          Surprised: '#FBFFF1'
-        }
+    const data = [
+      {name: 'Angry', value: emotion.angry},
+      {
+        name: 'Disgusted',
+        value: emotion.disgusted
       },
-      size: {
-        height: 350
-      },
-      padding: {
-        top: 30,
-        left: 250,
-        right: 250
-      },
+      {name: 'Fearful', value: emotion.fearful},
+      {name: 'Happy', value: emotion.happy},
+      {name: 'Neutral', value: emotion.neutral},
+      {name: 'Sad', value: emotion.sad},
+      {name: 'Surprised', value: emotion.surprised}
+    ]
 
-      bindto: `#pieChart${emotion.id}`
-    })
-    console.log('this is the chart ---->', chart)
-
-    console.dir(Object.keys(chart))
-
-    chart.legend.hide()
+    return data
   }
 
   render() {
@@ -69,11 +36,10 @@ class HistoryCard extends Component {
     let date = createdAt.slice(0, createdAt.indexOf('T'))
     const [year, month, day] = date.split('-')
 
-    // console.log('these are the historyCard props, ===> ', this.props)
     return (
       <div className="history__card" key={emotion.id}>
         <h1>{`${month}/${day}/${year}`}</h1>
-        <div id={`pieChart${emotion.id}`} className="charts" />
+        <SimplePiceChart data={this.getData()} />
       </div>
     )
   }

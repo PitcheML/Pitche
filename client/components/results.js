@@ -2,91 +2,35 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bar, bb, pie} from 'billboard.js'
 import {fetchEmotions} from '../store/emotion'
+import TwoLevelPieChart from './TwoLevelPieChart'
 
 class Results extends Component {
   constructor() {
     super()
-    this.createCharts = this.createCharts.bind(this)
+    this.getData = this.getData.bind(this)
   }
   async componentDidMount() {
     await this.props.getEmotions()
-    this.createCharts()
   }
 
-  createCharts() {
-    console.log('these are the emotions--->', this)
+  getData() {
     const emotions = this.props.emotion
     const recentResult = emotions[emotions.length - 1]
-    console.log('these are the recent results ---->', recentResult)
-    bb.generate({
-      data: {
-        columns: [
-          ['Angry', recentResult.angry],
-          ['Disgusted', recentResult.disgusted],
-          ['Fearful', recentResult.fearful],
-          ['Happy', recentResult.happy],
-          ['Neutral', recentResult.neutral],
-          ['Sad', recentResult.sad],
-          ['Surprised', recentResult.surprised]
-        ],
-        type: pie(),
-        label: {
-          show: true
-        },
-        labels: {
-          colors: 'black'
-        },
-        colors: {
-          Angry: '#060760',
-          Disgusted: '#090C9B',
-          Fearful: '#3D52D5',
-          Happy: '#6878DE',
-          Neutral: '#B4C5E4',
-          Sad: '#D2DCEF',
-          Surprised: '#FBFFF1'
-        }
+
+    const data = [
+      {name: 'Angry', value: recentResult.angry},
+      {
+        name: 'Disgusted',
+        value: recentResult.disgusted
       },
-      size: {
-        height: 500
-      },
-      padding: {
-        left: 250,
-        right: 250
-      },
-      bindto: '#pieChart'
-    })
-    bb.generate({
-      data: {
-        columns: [
-          ['Angry', (recentResult.angry * 100).toFixed(2)],
-          ['Disgusted', (recentResult.disgusted * 100).toFixed(2)],
-          ['Fearful', (recentResult.fearful * 100).toFixed(2)],
-          ['Happy', (recentResult.happy * 100).toFixed(2)],
-          ['Neutral', (recentResult.neutral * 100).toFixed(2)],
-          ['Sad', (recentResult.sad * 100).toFixed(2)],
-          ['Surprised', (recentResult.surprised * 100).toFixed(2)]
-        ],
-        type: bar(),
-        labels: true,
-        colors: {
-          Angry: '#060760',
-          Disgusted: '#090C9B',
-          Fearful: '#3D52D5',
-          Happy: '#6878DE',
-          Neutral: '#B4C5E4',
-          Sad: '#D2DCEF',
-          Surprised: '#FBFFF1'
-        }
-      },
-      size: {
-        height: 500
-      },
-      padding: {
-        left: 250,
-        right: 250
-      },
-      bindto: '#barChart'
-    })
+      {name: 'Fearful', value: recentResult.fearful},
+      {name: 'Happy', value: recentResult.happy},
+      {name: 'Neutral', value: recentResult.neutral},
+      {name: 'Sad', value: recentResult.sad},
+      {name: 'Surprised', value: recentResult.surprised}
+    ]
+
+    return data
   }
 
   render() {
@@ -96,10 +40,8 @@ class Results extends Component {
         {this.props.emotion.length > 0 ? (
           <React.Fragment>
             <h2>Your Pitch Video Results:</h2>
-            <div className="results-charts">
-              <div id="pieChart" className="charts" />
-              <div id="barChart" className="charts" />
-            </div>
+
+            <TwoLevelPieChart data={this.getData()} />
           </React.Fragment>
         ) : (
           <h4>none</h4>
