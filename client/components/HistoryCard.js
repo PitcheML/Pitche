@@ -1,7 +1,7 @@
 import {Divider} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import SimplePiceChart from './SimplePieChart'
+import SimplePieChart from './SimplePieChart'
 
 class HistoryCard extends Component {
   constructor() {
@@ -25,21 +25,25 @@ class HistoryCard extends Component {
       {name: 'Sad', value: emotion.sad},
       {name: 'Surprised', value: emotion.surprised}
     ]
-
     return data
   }
 
   render() {
     const {emotion} = this.props
     const {createdAt} = emotion
-
     let date = createdAt.slice(0, createdAt.indexOf('T'))
     const [year, month, day] = date.split('-')
-
+    console.log(emotion)
     return (
       <div className="history__card" key={emotion.id}>
-        <h1>{`${month}/${day}/${year}`}</h1>
-        <SimplePiceChart data={this.getData()} />
+        <h1>Speech #{emotion.id}</h1>
+        <h2>{`${month}/${day}/${year}`}</h2>
+        {emotion.transcript ? (
+          <h2>Word Count: {emotion.transcript.split(' ').length}</h2>
+        ) : (
+          <h2>No Transcript</h2>
+        )}
+        <SimplePieChart data={this.getData()} />
       </div>
     )
   }
