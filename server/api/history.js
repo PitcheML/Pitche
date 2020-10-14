@@ -14,6 +14,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:pitchId', async (req, res, next) => {
+  try {
+    const pitch = await Emotion.findByPk(req.params.pitchId)
+    res.json(pitch)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const emotion = await Emotion.create(req.body)
