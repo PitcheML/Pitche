@@ -28,14 +28,102 @@ class SinglePitch extends Component {
 
     return data
   }
-
   render() {
+    const {pitch} = this.props
+    let rawTranscript,
+      splitTranscript,
+      likeCounter,
+      umCounter,
+      uhCounter,
+      okayCounter,
+      soCounter,
+      mostUsedWord,
+      mostUsedCount
+    if (this.props.pitch.id) {
+      rawTranscript = pitch.transcript
+      splitTranscript = rawTranscript.split(' ')
+      likeCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (currentElem === 'like' || currentElem === 'bike') {
+          accum++
+        }
+        return accum
+      }, 0)
+      umCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (
+          currentElem === 'um' ||
+          currentElem === 'umm' ||
+          currentElem === 'uhm' ||
+          currentElem === 'hmm'
+        ) {
+          accum++
+        }
+        return accum
+      }, 0)
+      uhCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (
+          currentElem === 'uh' ||
+          currentElem === 'uhh' ||
+          currentElem === 'ah' ||
+          currentElem === 'er'
+        ) {
+          accum++
+        }
+        return accum
+      }, 0)
+      okayCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (currentElem === 'ok' || currentElem === 'okay') {
+          accum++
+        }
+        return accum
+      }, 0)
+      soCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (currentElem === 'so') {
+          accum++
+        }
+        return accum
+      }, 0)
+      let mostUsedObj = splitTranscript.reduce((accum, currentElem) => {
+        if (accum[currentElem]) {
+          accum[currentElem]++
+        } else {
+          accum[currentElem] = 1
+        }
+        return accum
+      }, {})
+      mostUsedWord = Object.keys(mostUsedObj).reduce((accum, currentElem) => {
+        return mostUsedObj[accum] > mostUsedObj[currentElem]
+          ? accum
+          : currentElem
+      })
+      mostUsedCount = Object.values(mostUsedObj).reduce(
+        (accum, currentElem) => {
+          return accum > currentElem ? accum : currentElem
+        }
+      )
+    }
     return (
       <div className="results">
         {this.props.pitch.id ? (
           <React.Fragment>
-            <h2>Your Pitch Video Results:</h2>
+            <h1>Speech Results</h1>
+            <p>Word Count:</p>
+            <p>{splitTranscript.length} words</p>
+            <p>Vocal Speed:</p>
+            <p>{splitTranscript.length / 10} words/second</p>
+            <p>Most Frequently Used Word:</p>
+            <p>
+              "{mostUsedWord}" (used {mostUsedCount} times)
+            </p>
+            <h2>Your Emotional State:</h2>
             <TwoLevelPieChart data={this.getData()} />
+            <h2>Your Transcript:</h2>
+            <p>"{rawTranscript}"</p>
+            <h2>Filler Word Analysis:</h2>
+            <p>"Like" Counter: {likeCounter}</p>
+            <p>"Um" Counter: {umCounter}</p>
+            <p>"Uh/Ah" Counter: {uhCounter}</p>
+            <p>"Ok/Okay" Counter: {okayCounter}</p>
+            <p>"So" Counter: {soCounter}</p>
           </React.Fragment>
         ) : (
           <h4>none</h4>
@@ -44,6 +132,21 @@ class SinglePitch extends Component {
     )
   }
 }
+//   render() {
+//     return (
+//       <div className="results">
+//         {this.props.pitch.id ? (
+//           <React.Fragment>
+//             <h2>Your Pitch Video Results:</h2>
+//             <TwoLevelPieChart data={this.getData()} />
+//           </React.Fragment>
+//         ) : (
+//           <h4>none</h4>
+//         )}
+//       </div>
+//     )
+//   }
+// }
 
 const mapState = state => {
   return {

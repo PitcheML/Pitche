@@ -1,6 +1,5 @@
 import React, {Component, Table} from 'react'
 import {connect} from 'react-redux'
-import {bar, bb, pie, donut, radar} from 'billboard.js'
 import {fetchEmotions} from '../store/emotion'
 import Paper from '@material-ui/core/Paper'
 import TwoLevelPieChart from './TwoLevelPieChart'
