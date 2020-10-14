@@ -1,6 +1,5 @@
 import {PieChart, Pie, Sector, Cell} from 'recharts'
 import React, {Component} from 'react'
-
 const COLORS = [
   '#060760',
   '#090C9B',
@@ -10,7 +9,6 @@ const COLORS = [
   '#D2DCEF',
   '#FBFFF1'
 ]
-
 const RADIAN = Math.PI / 180
 const renderCustomizedLabel = ({
   cx,
@@ -24,7 +22,6 @@ const renderCustomizedLabel = ({
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5
   const x = cx + radius * Math.cos(-midAngle * RADIAN)
   const y = cy + radius * Math.sin(-midAngle * RADIAN)
-
   return (
     <text
       x={x}
