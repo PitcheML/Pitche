@@ -13,7 +13,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
   return (
     <div className="auth__container">
-      <Paper elevation={3}>
+      <Paper elevation={7}>
         <div className="auth">
           <div className="auth__logo">
             <img src="logo.png" alt="" />
@@ -33,44 +33,27 @@ const AuthForm = props => {
               <input name="password" type="password" />
             </div>
             <div>
-              <button type="submit">{displayName}</button>
+              <button type="submit" className="auth__submit">
+                {displayName}
+              </button>
             </div>
-            <div>
-              <a
-                style={{
-                  width: '100%',
-                  margin: 'auto',
-                  height: '2.5rem',
-                  borderRadius: '4px',
-                  paddingLeft: '2px',
-                  paddingTop: '1px',
-                  paddingBottom: '1px'
-                }}
-                href="/auth/google"
-              >
-                <GoogleButton
-                  type="light"
-                  style={{
-                    width: '100%',
-                    margin: 'auto',
-                    height: '2.5rem',
-                    borderRadius: '4px',
-                    paddingLeft: '2px',
-                    paddingTop: '1px',
-                    paddingBottom: '1px'
-                  }}
-                />
+            <div className="auth__oauth">
+              <a href="/auth/google">
+                <GoogleButton type="dark" />
               </a>
-            </div>
-            <div>
-              {error &&
-                error.response && (
-                  <div className="auth__error"> {error.response.data} </div>
-                )}
             </div>
           </form>
         </div>
       </Paper>
+
+      <div className="auth_error__container">
+        {error &&
+          error.response && (
+            <Paper>
+              <div className="auth__error"> {error.response.data} </div>
+            </Paper>
+          )}
+      </div>
     </div>
   )
 }
