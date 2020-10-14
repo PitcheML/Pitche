@@ -1,6 +1,7 @@
 .auth {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .auth > form {
@@ -30,7 +31,7 @@
 }
 
 .auth__error {
-  color: white;
+  color: red;
 }
 
 .auth__container {
@@ -38,15 +39,19 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  height: 425px;
+  height: 500px;
+  flex-direction: column;
 }
 
 .auth__container > .MuiPaper-root {
   border: 1px solid black;
   width: 510px;
-  max-height: 300px;
+  max-height: 500px;
   margin-top: 10px;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  color: black;
 }
 
 .auth__container > .MuiPaper-elevation3 {
@@ -69,6 +74,56 @@
   width: 250px;
 }
 
-.auth > form > div:nth-child(3) > button {
-  margin-bottom: 20px;
+.auth > form > div:nth-child(3) {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.auth > form > div:nth-child(4) > a > div > div > svg {
+  height: 10px;
+}
+
+.auth > form > div:nth-child(5) {
+  margin: 0;
+  padding: 0;
+}
+
+.auth__oauth > a > div {
+  padding: 0px;
+  margin: 0px;
+  margin-top: 10px;
+}
+
+.auth__oauth {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.auth__submit {
+  width: 50%;
+  height: 25px;
+  margin-bottom: 10px;
+  outline-style: 0;
+  border-width: 0;
+  background-color: #090c9b;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 1px 2px black;
+}
+
+.auth > form > h6 {
+  padding: 0;
+  margin: 0;
+}
+
+.auth__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 510px;
+  height: 50px;
+}
+
+.auth__error:active {
+  color: black;
 }
