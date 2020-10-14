@@ -39,3 +39,7 @@
 .history__card > div > svg {
   height: 250px;
 }
+
+.history__container > * {
+  cursor: pointer;
+}
