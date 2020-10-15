@@ -9,9 +9,6 @@ class Results extends Component {
     super()
     this.getData = this.getData.bind(this)
   }
-  async componentDidMount() {
-    await this.props.getEmotions()
-  }
 
   getData() {
     const emotions = this.props.emotion
@@ -34,8 +31,8 @@ class Results extends Component {
     let rawTranscript,
       splitTranscript,
       likeCounter,
-      umCounter,
-      uhCounter,
+      yeahCounter,
+      heyCounter,
       okayCounter,
       soCounter,
       mostUsedWord,
@@ -49,24 +46,18 @@ class Results extends Component {
         }
         return accum
       }, 0)
-      umCounter = splitTranscript.reduce((accum, currentElem) => {
+      yeahCounter = splitTranscript.reduce((accum, currentElem) => {
         if (
-          currentElem === 'um' ||
-          currentElem === 'umm' ||
-          currentElem === 'uhm' ||
-          currentElem === 'hmm'
+          currentElem === 'yeah' ||
+          currentElem === 'yea' ||
+          currentElem === 'ya'
         ) {
           accum++
         }
         return accum
       }, 0)
-      uhCounter = splitTranscript.reduce((accum, currentElem) => {
-        if (
-          currentElem === 'uh' ||
-          currentElem === 'uhh' ||
-          currentElem === 'ah' ||
-          currentElem === 'er'
-        ) {
+      heyCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (currentElem === 'hey' || currentElem === 'hay') {
           accum++
         }
         return accum
@@ -123,13 +114,13 @@ class Results extends Component {
                     <div className="results__container__right__right">
                       <div className="results__container__right__top">
                         <Paper elevation={4}>
-                          <h2>Speech Results</h2>
+                          <h2>Speech Results:</h2>
                           <span>
-                            <p>Word Count:</p>
+                            <p>Word Count: </p>
                             <p>{splitTranscript.length} words</p>
                           </span>
                           <span>
-                            <p>Vocal Speed:</p>
+                            <p>Vocal Speed: </p>
                             <p>{splitTranscript.length / 10} words/second</p>
                           </span>
                           <span>
@@ -144,8 +135,9 @@ class Results extends Component {
                       <div className="results__container__right__bottom">
                         <Paper elevation={4}>
                           <h2>Filler Word Analysis:</h2>
-                          <p>"Um" Counter: {umCounter}</p>
-                          <p>"Uh/Ah" Counter: {uhCounter}</p>
+                          <p>"Like" Counter: {likeCounter}</p>
+                          <p>"Yeah" Counter: {yeahCounter}</p>
+                          <p>"Hey" Counter: {heyCounter}</p>
                           <p>"Ok/Okay" Counter: {okayCounter}</p>
                           <p>"So" Counter: {soCounter}</p>
                         </Paper>
