@@ -16,10 +16,7 @@ class HistoryCard extends Component {
 
     const data = [
       {name: 'Angry', value: emotion.angry},
-      {
-        name: 'Disgusted',
-        value: emotion.disgusted
-      },
+      {name: 'Disgusted', value: emotion.disgusted},
       {name: 'Fearful', value: emotion.fearful},
       {name: 'Happy', value: emotion.happy},
       {name: 'Neutral', value: emotion.neutral},
