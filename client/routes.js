@@ -6,11 +6,11 @@ import {
   Login,
   Signup,
   UserHome,
-  Video,
   Results,
   VideoFeed,
   History,
-  SinglePitch
+  SinglePitch,
+  UserAccount
 } from './components'
 import {me} from './store'
 
@@ -34,6 +34,7 @@ class Routes extends Component {
         <Route path="/results" component={Results} />
         <Route exact path="/history" component={History} />
         <Route path="/history/:pitchId" component={SinglePitch} />
+        <Route path="/account" component={UserAccount} />
 
         {isLoggedIn && (
           <Switch>

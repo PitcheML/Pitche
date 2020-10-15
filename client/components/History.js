@@ -1,4 +1,3 @@
-import {InsertDriveFileOutlined} from '@material-ui/icons'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchEmotions} from '../store/emotion'

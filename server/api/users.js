@@ -15,3 +15,24 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    let updatedUser
+    if (req.body.field === 'email') {
+      updatedUser = await User.update(
+        {email: req.body.value},
+        {where: {id: req.params.id}}
+      )
+    }
+    if (req.body.field === 'password') {
+      updatedUser = await User.update(
+        {password: req.body.value},
+        {where: {id: req.params.id}}
+      )
+    }
+    res.json(updatedUser)
+  } catch (err) {
+    next(err)
+  }
+})
