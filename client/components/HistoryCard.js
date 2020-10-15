@@ -1,4 +1,4 @@
-import {Divider} from '@material-ui/core'
+import {Divider, Paper} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
@@ -36,16 +36,20 @@ class HistoryCard extends Component {
     const [year, month, day] = date.split('-')
     console.log(emotion)
     return (
-      <div className="history__card" key={emotion.id}>
-        <h1>Speech #{emotion.id}</h1>
-        <h2>{`${month}/${day}/${year}`}</h2>
-        {emotion.transcript ? (
-          <h2>Word Count: {emotion.transcript.split(' ').length}</h2>
-        ) : (
-          <h2>No Transcript</h2>
-        )}
-        <SimplePieChart data={this.getData()} />
-      </div>
+      <Link to={`/history/${emotion.id}`}>
+        <Paper elevation={4}>
+          <div className="history__card" key={emotion.id}>
+            <h1>Speech #{emotion.id}</h1>
+            <h2>{`${month}/${day}/${year}`}</h2>
+            {emotion.transcript ? (
+              <h2>Word Count: {emotion.transcript.split(' ').length}</h2>
+            ) : (
+              <h2>No Transcript</h2>
+            )}
+            <SimplePieChart data={this.getData()} />
+          </div>
+        </Paper>
+      </Link>
     )
   }
 }

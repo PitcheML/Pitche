@@ -6,54 +6,120 @@
   height: 400px;
 }
 
-.results > .MuiPaper-root > h2 {
-  margin-top: 10px;
-  border-bottom: 1px solid #000;
+.results > .MuiPaper-rounded {
+  border-radius: 9px;
 }
 
-.results > .MuiPaper-root {
-  padding: 10px;
-  height: 750px;
-  overflow-y: scroll;
-}
-
-.MuiPaper-root::-webkit-scrollbar {
-  display: none;
-}
-
-.results > .MuiPaper-root > .results-charts > #barChart > svg > .bb-main {
+.results__container {
   display: flex;
-  width: 500px;
+  background-color: #f3f6f7;
 }
 
-.results__charts {
+.results__container__left > .MuiPaper-root {
+  margin: 10px;
+  background-color: #f9f9f9;
+  height: 80%;
+}
+
+.results__container__left > h2 {
+  text-align: center;
+}
+
+.results__container__left {
+  flex: 0.4;
   display: flex;
-  height: inherit;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.results__charts__left {
+.results__container__right {
+  flex: 1;
+  display: flex;
+}
+
+.results__container__right > .MuiPaper-root {
+  padding: 20px;
+  margin: 10px;
+  display: flex;
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.results__container__right__left {
   flex: 0.5;
+  margin-right: 20px;
+  border-right: 1px solid lightgray;
+}
+
+.results__container__right__left > h2 {
+  margin: 0px;
+}
+
+.results__container__right__left > p {
+  margin-right: 20px;
+}
+
+.results__container__right__right {
+  width: 100%;
+  flex: 0.5;
+}
+
+.results__container__right__top {
+  width: 100%;
+  translate: 100ms;
+}
+
+.results__container__right__top:hover {
+  transform: scale(1.03);
+}
+
+.results__container__right__bottom {
+  translate: 100ms;
+}
+
+.results__container__right__bottom:hover {
+  transform: scale(1.03);
+}
+
+.rate {
+  fill: black;
+}
+
+.pie__path {
+  border: 1px solid #000;
+}
+
+.results__container__right__top > .MuiPaper-root {
+  border: 1px solid gray;
   display: flex;
   flex-direction: column;
-  width: 500px;
+  padding: 10px;
 }
 
-.results__charts__left > #pieChart {
-  flex: 1;
-  height: 100%;
+.results__container__right__top > .MuiPaper-root > h2 {
+  margin: 0;
 }
 
-.results__chart__inner {
-  height: 75%;
-  margin-bottom: 10px;
+.results__container__right__top > .MuiPaper-root > span > p {
+  margin: 0;
 }
 
-.results__charts__left > .MuiPaper-root {
-  margin-bottom: 10px;
-  padding-top: 10px;
-  border: 1px solid lightgray;
+.results__container__right__top > .MuiPaper-root > span {
+  margin-top: 10px;
+  display: flex;
 }
 
-.results__charts__right {
-  flex: 0.5;
+.results__container__right__bottom > .MuiPaper-root {
+  padding: 10px;
+  border: 1px solid gray;
+  margin-top: 10px;
+}
+
+.results__container__right__bottom > .MuiPaper-root > h2 {
+  margin: 0;
+}
+
+.results__container__right__bottom > .MuiPaper-root > p {
+  margin: 0;
+  margin-top: 10px;
 }

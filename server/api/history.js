@@ -16,6 +16,7 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:pitchId', async (req, res, next) => {
   try {
+    console.log('fired')
     const pitch = await Emotion.findByPk(req.params.pitchId)
     res.json(pitch)
   } catch (err) {

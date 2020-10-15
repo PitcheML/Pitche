@@ -7,7 +7,8 @@ const COLORS = [
   '#6878DE',
   '#B4C5E4',
   '#D2DCEF',
-  '#FBFFF1'
+  '#9CAFE8'
+  // '#FBFFF1'
 ]
 const RADIAN = Math.PI / 180
 const renderCustomizedLabel = ({
@@ -45,7 +46,7 @@ export default class SimplePieChart extends Component {
           cx={100}
           cy={150}
           labelLine={false}
-          outerRadius={100}
+          outerRadius={95}
           fill="#8884d8"
           dataKey="value"
         >
