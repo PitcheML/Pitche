@@ -14,8 +14,10 @@ const COLORS = [
   '#3D52D5',
   '#6878DE',
   '#B4C5E4',
-  '#D2DCEF',
-  '#FBFFF1'
+  '#0B0EC1',
+  // '#D2DCEF',
+  '#9CAFE8'
+  // '#FBFFF1'
 ]
 
 const renderActiveShape = props => {
@@ -45,7 +47,7 @@ const renderActiveShape = props => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fill="black">
         {payload.name}
       </text>
       <Sector
@@ -79,6 +81,7 @@ const renderActiveShape = props => {
         fill="#333"
       />
       <text
+        className="rate"
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         dy={18}
@@ -104,13 +107,13 @@ export default class Example extends PureComponent {
 
   render() {
     return (
-      <PieChart width={500} height={400}>
+      <PieChart width={500} height={250}>
         <Pie
           activeIndex={this.state.activeIndex}
           activeShape={renderActiveShape}
           data={this.props.data}
           cx={250}
-          cy={200}
+          cy={100}
           innerRadius={60}
           outerRadius={80}
           fill="#8884d8"
