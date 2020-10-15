@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import Tutorial from './Tutorial'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
   const {email} = props
-
   return (
     <div>
       <h3>
-        Welcome, click above to see your previous pitches or record a new one
+        <Tutorial />
       </h3>
     </div>
   )

@@ -5,6 +5,7 @@
 @import 'navbar.css';
 @import 'History.css';
 @import 'user-account.css';
+@import 'tutorial.css';
 
 body {
   font-family: sans-serif;
