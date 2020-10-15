@@ -1,0 +1,86 @@
+.userHome {
+  color: black;
+}
+
+.userHome__container {
+  background-color: #f3f6f7;
+  margin: 20px;
+  border: 1px solid #000;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userHome__top__left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  padding-top: 0px;
+}
+
+.userHome__top__left > .MuiAvatar-root {
+  width: 175px;
+  height: 175px;
+}
+
+.userHome__bottom__active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.userHome__bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userHome__bottom > .MuiButton-root {
+  margin-bottom: 10px;
+  translate: transform 100ms;
+}
+
+.userHome__bottom:hover > .MuiButton-root {
+  transform: scale(1.03);
+  background-color: red;
+  color: white;
+}
+
+.userHome__top {
+  border-bottom: 1px solid lightgray;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userHome__bottom > h4 {
+  font-size: larger;
+  padding-top: 10px;
+  margin: 0;
+}
+
+.userHome__bottom > h3 {
+  font-size: xx-large;
+  margin: 0px;
+  padding: 0;
+  color: #090c9b;
+}
+
+.userHome__bottom__active > a > .MuiPaper-root {
+  margin-left: 10px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+}
+
+.userHome__bottom__active > a > .MuiPaper-root:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
