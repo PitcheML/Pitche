@@ -5,7 +5,11 @@
 @import 'navbar.css';
 @import 'History.css';
 @import 'user-account.css';
+
 @import 'user-home.css';
+
+@import 'tutorial.css';
+
 
 body {
   font-family: sans-serif;

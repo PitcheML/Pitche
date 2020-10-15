@@ -1,14 +1,19 @@
 import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+
 import {Avatar, Button} from '@material-ui/core'
 import HistoryCard from './HistoryCard'
 import {fetchEmotions} from '../store/emotion'
+
+import Tutorial from './Tutorial'
+
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
+
   console.log('these are the props --->', props)
   const {email, user, emotion} = props
 
@@ -45,8 +50,10 @@ export const UserHome = props => {
               </Button>
             </>
           )}
+          <Tutorial />
         </div>
       </div>
+
     </div>
   )
 }

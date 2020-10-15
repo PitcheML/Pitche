@@ -4,7 +4,6 @@ import * as faceapi from 'face-api.js'
 import {setEmotionsInDb} from '../store/emotion'
 import Countdown from 'react-countdown'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
-import {HistoryOutlined} from '@material-ui/icons'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 let videostream
@@ -20,7 +19,6 @@ const emotions = {
 
 const dataTimer = 100
 const totalVideoTime = 10000
-const totalIntervals = totalVideoTime / dataTimer
 
 let audiostream
 let output_result = ''
