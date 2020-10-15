@@ -1,0 +1,37 @@
+.tutorial {
+  display: flex;
+  border: 1px solid #000;
+  background-color: white;
+  height: 400px;
+  margin: 10px;
+}
+
+.main-tutorial > h2 {
+  color: black;
+}
+
+.main-tutorial > h3 {
+  color: black;
+}
+
+.pitch-instruction > p {
+  color: black;
+}
+
+.user-title {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.pitch-instruction {
+  display: flex;
+  flex-direction: column;
+}
+
+ol {
+  justify-content: space-around;
+}
+
+li {
+  color: black;
+}
