@@ -33,8 +33,8 @@ class SinglePitch extends Component {
     let rawTranscript,
       splitTranscript,
       likeCounter,
-      umCounter,
-      uhCounter,
+      yeahCounter,
+      heyCounter,
       okayCounter,
       soCounter,
       mostUsedWord,
@@ -48,24 +48,18 @@ class SinglePitch extends Component {
         }
         return accum
       }, 0)
-      umCounter = splitTranscript.reduce((accum, currentElem) => {
+      yeahCounter = splitTranscript.reduce((accum, currentElem) => {
         if (
-          currentElem === 'um' ||
-          currentElem === 'umm' ||
-          currentElem === 'uhm' ||
-          currentElem === 'hmm'
+          currentElem === 'yeah' ||
+          currentElem === 'yea' ||
+          currentElem === 'ya'
         ) {
           accum++
         }
         return accum
       }, 0)
-      uhCounter = splitTranscript.reduce((accum, currentElem) => {
-        if (
-          currentElem === 'uh' ||
-          currentElem === 'uhh' ||
-          currentElem === 'ah' ||
-          currentElem === 'er'
-        ) {
+      heyCounter = splitTranscript.reduce((accum, currentElem) => {
+        if (currentElem === 'hey' || currentElem === 'hay') {
           accum++
         }
         return accum
@@ -143,8 +137,9 @@ class SinglePitch extends Component {
                       <div className="results__container__right__bottom">
                         <Paper elevation={4}>
                           <h2>Filler Word Analysis:</h2>
-                          <p>"Um" Counter: {umCounter}</p>
-                          <p>"Uh/Ah" Counter: {uhCounter}</p>
+                          <p>"Like" Counter: {likeCounter}</p>
+                          <p>"Yeah" Counter: {yeahCounter}</p>
+                          <p>"Hey" Counter: {heyCounter}</p>
                           <p>"Ok/Okay" Counter: {okayCounter}</p>
                           <p>"So" Counter: {soCounter}</p>
                         </Paper>
