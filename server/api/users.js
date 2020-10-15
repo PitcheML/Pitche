@@ -18,20 +18,17 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    let updatedUser
     if (req.body.field === 'email') {
-      updatedUser = await User.update(
-        {email: req.body.value},
-        {where: {id: req.params.id}}
-      )
+      await User.update({email: req.body.value}, {where: {id: req.params.id}})
     }
     if (req.body.field === 'password') {
-      updatedUser = await User.update(
+      await User.update(
         {password: req.body.value},
         {where: {id: req.params.id}}
       )
     }
-    res.json(updatedUser)
+    const newUserInfo = await User.findByPk(req.params.id)
+    res.json(newUserInfo)
   } catch (err) {
     next(err)
   }

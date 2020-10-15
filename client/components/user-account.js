@@ -21,17 +21,21 @@ class UserAccount extends Component {
     this.props.getEmotions()
   }
 
-  changeEmail() {
+  changeEmail(evt) {
+    evt.preventDefault()
     if (this.state.email) {
       this.props.updateUser(this.props.user.id, 'email', this.state.email)
+      this.setState({email: ''})
     } else {
       this.setState({invalidInputs: true})
     }
   }
 
-  changePassword() {
+  changePassword(evt) {
+    evt.preventDefault()
     if (this.state.password) {
       this.props.updateUser(this.props.user.id, 'password', this.state.password)
+      this.setState({password: ''})
     } else {
       this.setState({invalidInputs: true})
     }
@@ -59,7 +63,12 @@ class UserAccount extends Component {
               <label htmlFor="email">
                 <small>Change Email</small>
               </label>
-              <input onChange={this.onChange} name="email" type="text" />
+              <input
+                onChange={this.onChange}
+                name="email"
+                type="text"
+                value={this.state.email}
+              />
               <button type="submit">Click to Update Email</button>
             </div>
           </form>
@@ -70,7 +79,12 @@ class UserAccount extends Component {
               <label htmlFor="password">
                 <small>Change Password</small>
               </label>
-              <input onChange={this.onChange} name="password" type="password" />
+              <input
+                onChange={this.onChange}
+                name="password"
+                type="password"
+                value={this.state.password}
+              />
               <button type="submit">Click to Update Password</button>
             </div>
           </form>

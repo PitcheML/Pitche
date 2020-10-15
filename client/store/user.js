@@ -26,7 +26,7 @@ const updatedUser = user => ({type: UPDATED_USER, user})
 export const updateUser = (id, field, value) => async dispatch => {
   try {
     console.log('thunk fired')
-    const res = await axios.put(`/${id}`, {field, value})
+    const res = await axios.put(`/api/users/${id}`, {field, value})
     dispatch(updatedUser(res.data))
   } catch (err) {
     console.log(err)
