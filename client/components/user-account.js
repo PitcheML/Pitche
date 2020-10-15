@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {updateUser} from '../store/user'
 import {fetchEmotions} from '../store/emotion'
 import {Avatar} from '@material-ui/core'
+import HistoryCard from './HistoryCard'
 
 class UserAccount extends Component {
   constructor() {
@@ -48,51 +49,76 @@ class UserAccount extends Component {
   render() {
     const {user, emotion} = this.props
     return (
-      <div>
-        <div>
-          <Avatar />
-          <h1>User Email:</h1>
-          <h1>{user.email}</h1>
-        </div>
-        <div>
-          <h2>Total Recorded Pitches: {emotion.length}</h2>
-        </div>
-        <div>
-          <form onSubmit={this.changeEmail}>
-            <div>
-              <label htmlFor="email">
-                <small>Change Email</small>
-              </label>
-              <input
-                onChange={this.onChange}
-                name="email"
-                type="text"
-                value={this.state.email}
-              />
-              <button type="submit">Click to Update Email</button>
+      <div className="userAccount">
+        <div className="userAccount__container">
+          <div className="userAccount__container__top">
+            <div className="userAccount__left">
+              <Avatar />
+              <h1>{user.email}</h1>
+              <h1>Total Recorded Pitches: {emotion.length}</h1>
             </div>
-          </form>
-        </div>
-        <div>
-          <form onSubmit={this.changePassword}>
-            <div>
-              <label htmlFor="password">
-                <small>Change Password</small>
-              </label>
-              <input
-                onChange={this.onChange}
-                name="password"
-                type="password"
-                value={this.state.password}
-              />
-              <button type="submit">Click to Update Password</button>
+            <div className="userAccount__middle">
+              <div className="middle__top">
+                <form
+                  onSubmit={this.changeEmail}
+                  className="userAccount__email"
+                >
+                  <div>
+                    <div className="email__top">
+                      <label htmlFor="email">
+                        <small>Change Email</small>
+                      </label>
+                      <input
+                        onChange={this.onChange}
+                        name="email"
+                        type="text"
+                        value={this.state.email}
+                      />
+                    </div>
+                    <div className="email__button">
+                      <button type="submit">Update Email</button>
+                    </div>
+                  </div>
+                </form>
+                <form
+                  onSubmit={this.changePassword}
+                  className="userAccount__pw"
+                >
+                  <div>
+                    <div className="pw__top">
+                      <label htmlFor="password">
+                        <small>Change Password</small>
+                      </label>
+                      <input
+                        onChange={this.onChange}
+                        name="password"
+                        type="password"
+                        value={this.state.password}
+                      />
+                    </div>
+                    <div className="pw__button">
+                      <button type="submit">Update Password</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div className="middle__bottom">
+                {this.state.invalidInputs ? (
+                  <h3>You need to add inputs to update user information</h3>
+                ) : null}
+              </div>
             </div>
-          </form>
-          {this.state.invalidInputs ? (
-            <h3>You need to add inputs to update user information</h3>
-          ) : (
-            <div />
-          )}
+            <div className="userAccount__right" />
+          </div>
+          <div className="userAccount__container__bottom">
+            {emotion.map(invEmo => {
+              return (
+                <>
+                  <HistoryCard key={invEmo.id} emotion={invEmo} />
+                </>
+              )
+            })}
+          </div>
         </div>
       </div>
     )

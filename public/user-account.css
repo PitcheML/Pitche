@@ -1,0 +1,109 @@
+.userAccount {
+  color: black;
+}
+
+.userAccount__container {
+  border: 1px solid #000;
+  background-color: white;
+  height: 675px;
+  margin: 10px;
+}
+
+.userAccount__container__top {
+  display: flex;
+  height: 200px;
+  width: 100%;
+}
+
+.userAccount__left {
+  border: 1px solid #000;
+  border-right: 0px;
+  width: auto;
+  flex: 0.4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userAccount__left > .MuiAvatar-root {
+  width: 100px;
+  height: 100px;
+}
+
+.userAccount__left > h1 {
+  margin: 0;
+  margin-top: 10px;
+  font-size: larger;
+}
+
+.userAccount__middle {
+  border: 1px solid #000;
+  width: auto;
+  flex: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userAccount__pw > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.userAccount__email > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userAccount__pw > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.userAccount__pw > div > .pw__top > input {
+  width: 250px;
+  height: 25px;
+}
+
+.userAccount__email > div > .email__top > input {
+  width: 250px;
+  height: 25px;
+}
+
+.userAccount__email > div > button {
+  max-width: 100px;
+  cursor: pointer;
+}
+
+.middle__top {
+  display: flex;
+}
+
+.middle__bottom > h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: smaller;
+  color: red;
+}
+
+.userAccount__container__bottom {
+  display: flex;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  max-height: 675px;
+}
+
+/* .userAccount__container__bottom::-webkit-scrollbar {
+  display: none;
+} */
+
+.userAccount__container__bottom > a > .MuiPaper-root {
+  border: 1px solid lightgray;
+  margin: 10px;
+}
