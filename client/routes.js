@@ -13,13 +13,16 @@ import {
   UserAccount
 } from './components'
 import {me} from './store'
+import {fetchEmotions} from './store/emotion'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount() {
+    console.log('this is the props ---->', this.props)
     this.props.loadInitialData()
+    this.props.getEmotions()
   }
 
   render() {
@@ -56,7 +59,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    emotion: state.emotion
   }
 }
 
@@ -64,7 +68,8 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
-    }
+    },
+    getEmotions: () => dispatch(fetchEmotions())
   }
 }
 

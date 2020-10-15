@@ -72,3 +72,7 @@
   box-shadow: 0px 2px 4px -1px black, 0px 4px 5px 0px black,
     0px 1px 10px 0px black;
 }
+
+.history__container > a > div:hover {
+  transform: scale(1.02);
+}

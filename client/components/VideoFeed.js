@@ -61,8 +61,12 @@ class VideoFeed extends Component {
       videostream.getTracks()[0].stop()
     }
     videostream = null
-    audiostream.stop()
-    this.setState({isListening: false})
+    try {
+      audiostream.stop()
+      this.setState({isListening: false})
+    } catch (e) {
+      console.log('')
+    }
   }
 
   handleListen = () => {
