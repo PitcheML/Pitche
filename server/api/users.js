@@ -15,3 +15,21 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    if (req.body.field === 'email') {
+      await User.update({email: req.body.value}, {where: {id: req.params.id}})
+    }
+    if (req.body.field === 'password') {
+      await User.update(
+        {password: req.body.value},
+        {where: {id: req.params.id}}
+      )
+    }
+    const newUserInfo = await User.findByPk(req.params.id)
+    res.json(newUserInfo)
+  } catch (err) {
+    next(err)
+  }
+})
