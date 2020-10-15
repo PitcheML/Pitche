@@ -4,6 +4,7 @@
 @import 'results.css';
 @import 'navbar.css';
 @import 'History.css';
+@import 'user-account.css';
 
 body {
   font-family: sans-serif;

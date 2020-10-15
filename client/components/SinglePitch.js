@@ -105,25 +105,55 @@ class SinglePitch extends Component {
       <div className="results">
         {this.props.pitch.id ? (
           <React.Fragment>
-            <h1>Speech Results</h1>
-            <p>Word Count:</p>
-            <p>{splitTranscript.length} words</p>
-            <p>Vocal Speed:</p>
-            <p>{splitTranscript.length / 10} words/second</p>
-            <p>Most Frequently Used Word:</p>
-            <p>
-              "{mostUsedWord}" (used {mostUsedCount} times)
-            </p>
-            <h2>Your Emotional State:</h2>
-            <TwoLevelPieChart data={this.getData()} />
-            <h2>Your Transcript:</h2>
-            <p>"{rawTranscript}"</p>
-            <h2>Filler Word Analysis:</h2>
-            <p>"Like" Counter: {likeCounter}</p>
-            <p>"Um" Counter: {umCounter}</p>
-            <p>"Uh/Ah" Counter: {uhCounter}</p>
-            <p>"Ok/Okay" Counter: {okayCounter}</p>
-            <p>"So" Counter: {soCounter}</p>
+            <Paper elevation={4}>
+              <div className="results__container">
+                <div className="results__container__left">
+                  <h2>Your Emotional State:</h2>
+                  <div className="results__container__chart">
+                    <TwoLevelPieChart data={this.getData()} />
+                  </div>
+                </div>
+                <div className="results__container__right">
+                  <Paper elevation={4}>
+                    <div className="results__container__right__left">
+                      <h2>Your Transcript:</h2>
+                      <p>"{rawTranscript}"</p>
+                    </div>
+                    <div className="results__container__right__right">
+                      <div className="results__container__right__top">
+                        <Paper elevation={4}>
+                          <h2>Speech Results</h2>
+                          <span>
+                            <p>Word Count:</p>
+                            <p>{splitTranscript.length} words</p>
+                          </span>
+                          <span>
+                            <p>Vocal Speed:</p>
+                            <p>{splitTranscript.length / 10} words/second</p>
+                          </span>
+                          <span>
+                            <p>Most Frequently Used Word:</p>
+                            <p>
+                              "{mostUsedWord}" (used {mostUsedCount} times)
+                            </p>
+                          </span>
+                        </Paper>
+                      </div>
+
+                      <div className="results__container__right__bottom">
+                        <Paper elevation={4}>
+                          <h2>Filler Word Analysis:</h2>
+                          <p>"Um" Counter: {umCounter}</p>
+                          <p>"Uh/Ah" Counter: {uhCounter}</p>
+                          <p>"Ok/Okay" Counter: {okayCounter}</p>
+                          <p>"So" Counter: {soCounter}</p>
+                        </Paper>
+                      </div>
+                    </div>
+                  </Paper>
+                </div>
+              </div>
+            </Paper>
           </React.Fragment>
         ) : (
           <h4>none</h4>
