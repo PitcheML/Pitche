@@ -35,3 +35,12 @@ ol {
 li {
   color: black;
 }
+
+.main-tutorial {
+  flex: 0.4;
+  border-right: 1px solid lightgray;
+}
+
+.pitch-instruction {
+  flex: 0.6;
+}
