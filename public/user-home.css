@@ -84,3 +84,87 @@
   cursor: pointer;
   transform: scale(1.02);
 }
+
+.userHome__tutorial {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  border: 1px solid white;
+  height: 100vh;
+}
+
+.userHome__tutorial > div {
+  padding: 10px;
+  max-width: 80vw;
+}
+
+.user-title {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+  font-size: 30px;
+}
+
+.main-tutorial {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-title__welcome {
+  width: 60%;
+  font-size: 15px;
+}
+
+.pitch-instructions {
+  display: flex;
+  flex-direction: column;
+}
+
+.pitch-instructions__bottom {
+  flex: 0.2;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pitch-instructions__bottom > p {
+  text-align: center;
+  font-size: 18px;
+  padding: 6px;
+  margin: 0;
+}
+
+.pitch-instructions__top {
+  flex: 0.8;
+}
+
+.bottom__button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.procedure {
+  margin: 10px;
+}
+
+.procedure > li {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.pitch-instructions__top > h4 {
+  font-size: x-large;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.bottom__button > button:hover {
+  transform: scale(1.02);
+}

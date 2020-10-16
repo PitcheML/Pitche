@@ -1,28 +1,49 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-
 import {Avatar, Button} from '@material-ui/core'
 import HistoryCard from './HistoryCard'
 import {fetchEmotions} from '../store/emotion'
-
 import Tutorial from './Tutorial'
-
+import Modal from '@material-ui/core/Modal'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
+  const [open, setOpen] = React.useState(false)
+  const handleOpen = () => {
+    setOpen(true)
+  }
 
-  console.log('these are the props --->', props)
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const body = (
+    <div className="userHome__tutorial">
+      <Tutorial handleClose={handleClose} />
+    </div>
+  )
+
   const {email, user, emotion} = props
 
   useEffect(() => {
     props.getEmotions()
+
+    handleOpen()
   }, [])
 
   return (
     <div className="userHome">
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {body}
+      </Modal>
       <div className="userHome__container">
         <div className="userHome__top">
           <div className="userHome__top__left">
@@ -50,10 +71,8 @@ export const UserHome = props => {
               </Button>
             </>
           )}
-          <Tutorial />
         </div>
       </div>
-
     </div>
   )
 }
