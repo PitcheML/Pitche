@@ -23,7 +23,8 @@ async function seed() {
     happy: 0,
     neutral: 0.8048780487804879,
     sad: 0.17073170731707318,
-    surprised: 0.024390243902439025
+    surprised: 0.024390243902439025,
+    transcript: 'HI IM CODY IM A DOG HIRE ME ILL DO A GOOD JOB WOOF'
   })
   await cody.addEmotion(emotion)
 }
