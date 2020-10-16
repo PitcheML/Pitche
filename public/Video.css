@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  color: white;
 }
 
 .video__loading {
@@ -36,10 +37,10 @@
 .video__left {
   flex: 1;
   width: 100%;
-  border: 1px solid black;
   justify-content: center;
   align-items: center;
   display: flex;
+  font-size: xx-large;
 }
 
 .video__right {
@@ -152,4 +153,29 @@
   90% {
     box-shadow: 0px 0px 5px 13px rgba(173, 0, 0, 0);
   }
+}
+
+.video__loading__div {
+  border: 1px solid #000;
+  width: 500px;
+  height: 100px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.video__loading__div > .MuiLinearProgress-root {
+  width: 90%;
+}
+.video__loading__div {
+  margin-top: 10px;
+  color: black;
+}
+
+.video__loading__div > h4 {
+  padding-top: 0;
+  margin-top: 0;
 }

@@ -5,6 +5,7 @@ import {setEmotionsInDb} from '../store/emotion'
 import Countdown from 'react-countdown'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import {LinearProgress} from '@material-ui/core'
 
 let videostream
 const emotions = {
@@ -18,7 +19,7 @@ const emotions = {
 }
 
 const dataTimer = 100
-const totalVideoTime = 10000
+const totalVideoTime = 30000
 
 let audiostream
 let output_result = ''
@@ -215,52 +216,64 @@ class VideoFeed extends Component {
     const VIDEO_WIDTH = 640
 
     return (
-      <div className="video">
-        <div className="video__left">
-          {isInitialized && isRecording === false ? (
-            <h4 className="video__loading">
-              Loading... <CircularProgress className="video__loading__circle" />
-            </h4>
-          ) : null}
-          {isProcessing ? (
-            <Countdown date={Date.now() + totalVideoTime} daysInHours={true}>
-              <Completion stopVideo={this.stopVideo} self={this} />
-            </Countdown>
-          ) : null}
-        </div>
-        <div className="video__right">
-          {isProcessing ? (
-            <h4>
-              REC <button type="button" className="rec" />
-            </h4>
-          ) : null}
-          <div className="video__container">
-            <video
-              className="videoFeed__video"
-              autoPlay
-              muted
-              height={VIDEO_HEIGHT}
-              width={VIDEO_WIDTH}
-              onPlay={this.onVideoPlay}
-            />
+      <>
+        <div className="video">
+          <div className="video__left">
+            {isInitialized && isRecording === false ? (
+              <h4 className="video__loading" />
+            ) : null}
+            {isProcessing ? (
+              <Countdown date={Date.now() + totalVideoTime} daysInHours={true}>
+                <Completion stopVideo={this.stopVideo} self={this} />
+              </Countdown>
+            ) : null}
+          </div>
+          <div className="video__right">
+            {isProcessing ? (
+              <h4>
+                REC <button type="button" className="rec" />
+              </h4>
+            ) : null}
+            <div className="video__container">
+              <video
+                className="videoFeed__video"
+                autoPlay
+                muted
+                height={VIDEO_HEIGHT}
+                width={VIDEO_WIDTH}
+                onPlay={this.onVideoPlay}
+              />
+            </div>
+          </div>
+          <div
+            className={
+              isInitialized === true && isRecording === true
+                ? 'video__bottom'
+                : 'video__bottom__hidden'
+            }
+          >
+            {isInitialized && isRecording ? (
+              <button
+                type="button"
+                onClick={this.startProcessing}
+                disabled={!(isInitialized === true && isRecording === true)}
+              >
+                Start Processing <VideoCallIcon />
+              </button>
+            ) : (
+              <div className="video__loading__div">
+                {isInitialized === false && isRecording === false ? (
+                  <h4>Webcam Loading...</h4>
+                ) : (
+                  <h4>Loading up models....</h4>
+                )}
+
+                <LinearProgress />
+              </div>
+            )}
           </div>
         </div>
-        <div
-          className={
-            isInitialized === true && isRecording === true
-              ? 'video__bottom'
-              : 'video__bottom__hidden'
-          }
-        >
-          <button
-            type="button"
-            onClick={this.startProcessing}
-            disabled={!(isInitialized === true && isRecording === true)}
-          >
-            Start Processing <VideoCallIcon />
-          </button>
-        </div>
-      </div>
+      </>
     )
   }
 }
