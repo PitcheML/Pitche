@@ -121,7 +121,10 @@ class Results extends Component {
                           </span>
                           <span>
                             <p>Vocal Speed: </p>
-                            <p>{splitTranscript.length / 10} words/second</p>
+                            <p>
+                              {(splitTranscript.length / 30).toFixed(2)}{' '}
+                              words/second
+                            </p>
                           </span>
                           <span>
                             <p>Most Frequently Used Word:</p>

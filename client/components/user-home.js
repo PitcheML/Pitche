@@ -7,7 +7,6 @@ import {fetchEmotions} from '../store/emotion'
 import Tutorial from './Tutorial'
 import Modal from '@material-ui/core/Modal'
 
-
 /**
  * COMPONENT
  */
@@ -61,7 +60,7 @@ export const UserHome = props => {
             emotion.map(emo => <HistoryCard key={emo.id} emotion={emo} />)
           ) : (
             <>
-              <h4>You don't have any record pitches... let's change that!</h4>
+              <h4>You don't have any recorded pitches... let's change that!</h4>
               <h3>⬇</h3>
               <Button
                 variant="contained"
