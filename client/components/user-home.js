@@ -8,12 +8,10 @@ import {fetchEmotions} from '../store/emotion'
 
 import Tutorial from './Tutorial'
 
-
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-
   console.log('these are the props --->', props)
   const {email, user, emotion} = props
 
@@ -27,7 +25,7 @@ export const UserHome = props => {
         <div className="userHome__top">
           <div className="userHome__top__left">
             <h4>Welcome back, {user.email}!</h4>
-            <Avatar />
+            <Avatar src={user.imgUrl} />
           </div>
         </div>
         <div
@@ -53,7 +51,6 @@ export const UserHome = props => {
           <Tutorial />
         </div>
       </div>
-
     </div>
   )
 }
