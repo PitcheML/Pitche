@@ -19,6 +19,9 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           {/* The navbar will show these links after you log in */}
 
           <div className="navbar__left">
+            <div className="navbar_links">
+              <img id="pitche-logo" src="Plogo.png" alt="" width="40" />
+            </div>
             <div className="navbar__links">
               <Link to="/home">
                 Home <HomeIcon />
