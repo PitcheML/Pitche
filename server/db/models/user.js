@@ -24,6 +24,9 @@ const User = db.define('user', {
       return () => this.getDataValue('salt')
     }
   },
+  imgUrl: {
+    type: Sequelize.TEXT
+  },
   googleId: {
     type: Sequelize.STRING
   }

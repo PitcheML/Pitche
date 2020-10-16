@@ -7,6 +7,7 @@ import {fetchEmotions} from '../store/emotion'
 import Tutorial from './Tutorial'
 import Modal from '@material-ui/core/Modal'
 
+
 /**
  * COMPONENT
  */
@@ -48,7 +49,7 @@ export const UserHome = props => {
         <div className="userHome__top">
           <div className="userHome__top__left">
             <h4>Welcome back, {user.email}!</h4>
-            <Avatar />
+            <Avatar src={user.imgUrl} />
           </div>
         </div>
         <div
