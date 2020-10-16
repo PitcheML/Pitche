@@ -11,7 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import CreateIcon from '@material-ui/icons/Create'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="navbar">
     <nav>
       {isLoggedIn ? (
@@ -34,7 +34,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 Last Pitch Analysis <AssessmentIcon />
               </Link>
             </div>
-              <div className="navbar__links">
+            <div className="navbar__links">
               <Link to="/history">
                 Pitch History <AssessmentIcon />
               </Link>
@@ -42,7 +42,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </div>
           <div className="navbar__right">
             <div className="navbar__right__acc">
-              <Avatar />
+              <Avatar src={user.imgUrl} />
               <Link to="/account">My Account</Link>
             </div>
             <div className="navbar__links__right">
@@ -81,7 +81,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

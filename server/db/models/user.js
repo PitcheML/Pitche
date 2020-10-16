@@ -25,7 +25,9 @@ const User = db.define('user', {
     }
   },
   imgUrl: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    defaultValue:
+      'https://www.clipartkey.com/mpngs/m/281-2819877_head-neck-organ-brain-silhouette.png'
   },
   googleId: {
     type: Sequelize.STRING

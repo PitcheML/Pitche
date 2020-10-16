@@ -53,7 +53,7 @@ class UserAccount extends Component {
         <div className="userAccount__container">
           <div className="userAccount__container__top">
             <div className="userAccount__left">
-              <Avatar />
+              <Avatar src={user.imgUrl} />
               <h1>{user.email}</h1>
               <h1>Total Recorded Pitches: {emotion.length}</h1>
             </div>
