@@ -31,6 +31,10 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  tutorialCompleted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 

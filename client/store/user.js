@@ -23,9 +23,27 @@ const updatedUser = user => ({type: UPDATED_USER, user})
 /**
  * THUNK CREATORS
  */
+
+export const finishTutorial = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/users/${id}/tutorial/`)
+    dispatch(updatedUser(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const updateUserImage = (id, imageUrl) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/users/${id}/imageUrl`, {imageUrl})
+    dispatch(updatedUser(res.data))
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const updateUser = (id, field, value) => async dispatch => {
   try {
-    console.log('thunk fired')
     const res = await axios.put(`/api/users/${id}`, {field, value})
     dispatch(updatedUser(res.data))
   } catch (err) {

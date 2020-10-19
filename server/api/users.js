@@ -33,3 +33,42 @@ router.put('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+// PUT /api/users/:id/tutorial
+router.put('/:id/tutorial', async (req, res, next) => {
+  try {
+    const {id} = req.params
+    await User.update(
+      {tutorialCompleted: true},
+      {
+        where: {
+          id
+        }
+      }
+    )
+    const newUserInfo = await User.findByPk(req.params.id)
+    res.json(newUserInfo)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// PUT /api/users/:id/imageUrl
+router.put('/:id/imageUrl', async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const {imageUrl} = req.body
+    await User.update(
+      {imgUrl: imageUrl},
+      {
+        where: {
+          id
+        }
+      }
+    )
+    const newUserInfo = await User.findByPk(req.params.id)
+    res.json(newUserInfo)
+  } catch (err) {
+    next(err)
+  }
+})

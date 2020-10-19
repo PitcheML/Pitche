@@ -6,18 +6,22 @@ import HistoryCard from './HistoryCard'
 import {fetchEmotions} from '../store/emotion'
 import Tutorial from './Tutorial'
 import Modal from '@material-ui/core/Modal'
+import {finishTutorial} from '../store/user'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const {email, user, emotion} = props
+
   const handleOpen = () => {
     setOpen(true)
   }
 
   const handleClose = () => {
     setOpen(false)
+    props.finishTutorial(user.id)
   }
 
   const body = (
@@ -26,12 +30,11 @@ export const UserHome = props => {
     </div>
   )
 
-  const {email, user, emotion} = props
-
   useEffect(() => {
     props.getEmotions()
-
-    handleOpen()
+    if (user.tutorialCompleted === false) {
+      setOpen(true)
+    }
   }, [])
 
   return (
@@ -90,7 +93,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getEmotions: () => dispatch(fetchEmotions())
+    getEmotions: () => dispatch(fetchEmotions()),
+    finishTutorial: userId => dispatch(finishTutorial(userId))
   }
 }
 
