@@ -15,9 +15,7 @@ const COLORS = [
   '#6878DE',
   '#B4C5E4',
   '#0B0EC1',
-  // '#D2DCEF',
   '#9CAFE8'
-  // '#FBFFF1'
 ]
 
 const renderActiveShape = props => {
@@ -88,7 +86,7 @@ const renderActiveShape = props => {
         textAnchor={textAnchor}
         fill="#999"
       >
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`${(percent * 100).toFixed(2)}%`}
       </text>
     </g>
   )
@@ -114,8 +112,8 @@ export default class Example extends PureComponent {
           data={this.props.data}
           cx={250}
           cy={100}
-          innerRadius={60}
-          outerRadius={80}
+          innerRadius={75}
+          outerRadius={90}
           fill="#8884d8"
           dataKey="value"
           onMouseEnter={this.onPieEnter}
