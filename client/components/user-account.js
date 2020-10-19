@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {updateUser} from '../store/user'
+import {updateUser, updateUserImage} from '../store/user'
 import {fetchEmotions} from '../store/emotion'
-import {Avatar} from '@material-ui/core'
+import {Avatar, Button} from '@material-ui/core'
 import HistoryCard from './HistoryCard'
+import {app} from '../../firebase'
+
+let file
+let e_upload
 
 class UserAccount extends Component {
   constructor() {
@@ -16,6 +20,7 @@ class UserAccount extends Component {
     this.onChange = this.onChange.bind(this)
     this.changeEmail = this.changeEmail.bind(this)
     this.changePassword = this.changePassword.bind(this)
+    this.handleUpload = this.handleUpload.bind(this)
   }
 
   componentDidMount() {
@@ -46,6 +51,23 @@ class UserAccount extends Component {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
+  async handleUpload(e) {
+    e.preventDefault()
+    const storageRef = app.storage().ref()
+    const fileRef = storageRef.child(file.name)
+    await fileRef.put(file)
+    const fileUrl = await fileRef.getDownloadURL()
+    const fileUploader = document.getElementsByClassName('file__uploader')[0]
+    fileUploader.reset()
+
+    //console.log('these are the props ---->', this)
+    this.props.updateUserImage(this.props.user.id, fileUrl)
+  }
+
+  onFileChange(e) {
+    file = e.target.files[0]
+  }
+
   render() {
     const {user, emotion} = this.props
     return (
@@ -59,6 +81,11 @@ class UserAccount extends Component {
             </div>
             <div className="userAccount__middle">
               <div className="middle__top">
+                <form onSubmit={this.handleUpload} className="file__uploader">
+                  <input type="file" onChange={this.onFileChange} />
+                  <div />
+                  <button type="submit">Upload</button>
+                </form>
                 <form
                   onSubmit={this.changeEmail}
                   className="userAccount__email"
@@ -111,13 +138,29 @@ class UserAccount extends Component {
             <div className="userAccount__right" />
           </div>
           <div className="userAccount__container__bottom">
-            {emotion.map(invEmo => {
-              return (
-                <>
-                  <HistoryCard key={invEmo.id} emotion={invEmo} />
-                </>
-              )
-            })}
+            {emotion.length > 0 ? (
+              emotion.map(invEmo => {
+                return (
+                  <>
+                    <HistoryCard key={invEmo.id} emotion={invEmo} />
+                  </>
+                )
+              })
+            ) : (
+              <div className="userAccount__noResults">
+                <h4>
+                  You don't have any recorded pitches... let's change that!
+                </h4>
+                <h3>⬇</h3>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => this.props.history.push('/video')}
+                >
+                  Record A New Pitch
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -135,7 +178,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     updateUser: (id, field, value) => dispatch(updateUser(id, field, value)),
-    getEmotions: () => dispatch(fetchEmotions())
+    getEmotions: () => dispatch(fetchEmotions()),
+    updateUserImage: (id, imageUrl) => dispatch(updateUserImage(id, imageUrl))
   }
 }
 
