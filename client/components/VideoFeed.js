@@ -258,7 +258,7 @@ class VideoFeed extends Component {
                 onClick={this.startProcessing}
                 disabled={!(isInitialized === true && isRecording === true)}
               >
-                Start Processing <VideoCallIcon />
+                Start Recording <VideoCallIcon />
               </button>
             ) : (
               <div className="video__loading__div">

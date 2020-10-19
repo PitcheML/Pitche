@@ -1,4 +1,4 @@
-import React, {Component, Table} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchEmotions} from '../store/emotion'
 import Paper from '@material-ui/core/Paper'
@@ -22,58 +22,52 @@ class Results extends Component {
       {name: 'Sad', value: recentResult.sad},
       {name: 'Surprised', value: recentResult.surprised}
     ]
-
     return data
   }
 
   render() {
     const emotions = this.props.emotion
-    let rawTranscript,
-      splitTranscript,
-      likeCounter,
-      yeahCounter,
-      heyCounter,
-      okayCounter,
-      soCounter,
-      mostUsedWord,
-      mostUsedCount
+    let rawTranscript, splitTranscript, mostUsedWord, mostUsedCount, allMetrics
     if (emotions.length > 0) {
       rawTranscript = emotions[emotions.length - 1].transcript
       splitTranscript = rawTranscript.split(' ')
-      likeCounter = splitTranscript.reduce((accum, currentElem) => {
+      allMetrics = splitTranscript.reduce((accum, currentElem) => {
         if (currentElem === 'like' || currentElem === 'bike') {
-          accum++
+          if (accum.like) accum.like++
+          else {
+            accum.like = 1
+          }
         }
-        return accum
-      }, 0)
-      yeahCounter = splitTranscript.reduce((accum, currentElem) => {
         if (
           currentElem === 'yeah' ||
           currentElem === 'yea' ||
           currentElem === 'ya'
         ) {
-          accum++
+          if (accum.yeah) accum.yeah++
+          else {
+            accum.yeah = 1
+          }
         }
-        return accum
-      }, 0)
-      heyCounter = splitTranscript.reduce((accum, currentElem) => {
         if (currentElem === 'hey' || currentElem === 'hay') {
-          accum++
+          if (accum.hey) accum.hey++
+          else {
+            accum.hey = 1
+          }
         }
-        return accum
-      }, 0)
-      okayCounter = splitTranscript.reduce((accum, currentElem) => {
         if (currentElem === 'ok' || currentElem === 'okay') {
-          accum++
+          if (accum.ok) accum.ok++
+          else {
+            accum.ok = 1
+          }
         }
-        return accum
-      }, 0)
-      soCounter = splitTranscript.reduce((accum, currentElem) => {
         if (currentElem === 'so') {
-          accum++
+          if (accum.so) accum.so++
+          else {
+            accum.so = 1
+          }
         }
         return accum
-      }, 0)
+      }, {})
       let mostUsedObj = splitTranscript.reduce((accum, currentElem) => {
         if (accum[currentElem]) {
           accum[currentElem]++
@@ -93,6 +87,7 @@ class Results extends Component {
         }
       )
     }
+
     return (
       <div className="results">
         {this.props.emotion.length > 0 ? (
@@ -105,6 +100,7 @@ class Results extends Component {
                     <TwoLevelPieChart data={this.getData()} />
                   </div>
                 </div>
+
                 <div className="results__container__right">
                   <Paper elevation={4}>
                     <div className="results__container__right__left">
@@ -116,20 +112,19 @@ class Results extends Component {
                         <Paper elevation={4}>
                           <h2>Speech Results:</h2>
                           <span>
-                            <p>Word Count: </p>
-                            <p>{splitTranscript.length} words</p>
+                            <p>Word Count: {splitTranscript.length} words</p>
                           </span>
                           <span>
-                            <p>Vocal Speed: </p>
                             <p>
+                              Vocal Speed:{' '}
                               {(splitTranscript.length / 30).toFixed(2)}{' '}
                               words/second
                             </p>
                           </span>
                           <span>
-                            <p>Most Frequently Used Word:</p>
                             <p>
-                              "{mostUsedWord}" (used {mostUsedCount} times)
+                              Most Frequently Used Word: "{mostUsedWord}" (used{' '}
+                              {mostUsedCount} times)
                             </p>
                           </span>
                         </Paper>
@@ -138,11 +133,26 @@ class Results extends Component {
                       <div className="results__container__right__bottom">
                         <Paper elevation={4}>
                           <h2>Filler Word Analysis:</h2>
-                          <p>"Like" Counter: {likeCounter}</p>
-                          <p>"Yeah" Counter: {yeahCounter}</p>
-                          <p>"Hey" Counter: {heyCounter}</p>
-                          <p>"Ok/Okay" Counter: {okayCounter}</p>
-                          <p>"So" Counter: {soCounter}</p>
+                          <p>
+                            "Like" Counter:{' '}
+                            {allMetrics.like ? allMetrics.like : 'None'}
+                          </p>
+                          <p>
+                            "Yeah" Counter:{' '}
+                            {allMetrics.yeah ? allMetrics.like : 'None'}
+                          </p>
+                          <p>
+                            "Ok/Okay" Counter:{' '}
+                            {allMetrics.ok ? allMetrics.like : 'None'}
+                          </p>
+                          <p>
+                            "So" Counter:{' '}
+                            {allMetrics.so ? allMetrics.like : 'None'}
+                          </p>
+                          <p>
+                            "Hey" Counter:{' '}
+                            {allMetrics.hey ? allMetrics.like : 'None'}
+                          </p>
                         </Paper>
                       </div>
                     </div>
