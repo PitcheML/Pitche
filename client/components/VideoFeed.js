@@ -1,13 +1,12 @@
+/* eslint-disable complexity */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as faceapi from 'face-api.js'
 import {setEmotionsInDb} from '../store/emotion'
 import Countdown from 'react-countdown'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import {LinearProgress} from '@material-ui/core'
+import {LinearProgress, Paper} from '@material-ui/core'
 
-let videostream
 const emotions = {
   sad: 0,
   angry: 0,
@@ -18,11 +17,9 @@ const emotions = {
   fearful: 0
 }
 
-const dataTimer = 100
-const totalVideoTime = 30000
-
+let videostream
 let audiostream
-let output_result = ''
+let outputResult = ''
 
 const Completion = ({stopVideo, self}) => {
   stopVideo()
@@ -38,10 +35,11 @@ class VideoFeed extends Component {
       isRecording: false,
       isProcessing: false,
       isListening: false,
-      emotionSet: false
+      recordingTime: 30000
     }
     this.stopVideo = this.stopVideo.bind(this)
     this.onVideoPlay = this.onVideoPlay.bind(this)
+    this.setRecordingTime = this.setRecordingTime.bind(this)
   }
 
   async componentDidMount() {
@@ -68,11 +66,45 @@ class VideoFeed extends Component {
     }
   }
 
+  setRecordingTime(evt, type = 'seconds') {
+    evt.preventDefault()
+
+    // console.log('this is the type ===> ', type)
+    if (type === 'minutes') {
+      let newVideoTime = evt.target.value
+      newVideoTime = newVideoTime * 60 * 1000
+      let seconds = document.getElementsByClassName(
+        'recording__time__seconds'
+      )[0].value
+      seconds *= 1000
+      newVideoTime += seconds
+
+      console.log('newvideotime =====> ', newVideoTime)
+
+      this.setState({
+        recordingTime: newVideoTime
+      })
+    } else {
+      let newVideoTime = evt.target.value
+      newVideoTime *= 1000
+
+      let minutes = document.getElementsByClassName(
+        'recording__time__minutes'
+      )[0].value
+      minutes = minutes * 60 * 1000
+      newVideoTime += minutes
+
+      console.log('newvideotime =====> ', newVideoTime)
+
+      this.setState({
+        recordingTime: newVideoTime
+      })
+    }
+  }
+
   handleListen = () => {
     const {isListening} = this.state
-
-    let output_transcript
-
+    let outputTranscript
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
     const mic = new SpeechRecognition()
@@ -84,45 +116,42 @@ class VideoFeed extends Component {
 
     if (isListening) {
       mic.start()
-      mic.onend = () => {
-        mic.start()
-      }
+      // mic.onend = () => {
+      //   mic.start()
+      // }
     } else {
       mic.stop()
-      mic.onend = () => {
-        console.log('Stopped Mic on Click')
-      }
+      // mic.onend = () => {
+      //   console.log('Mic Stop')
+      // }
     }
     mic.onstart = () => {
-      console.log('Mics on')
+      console.log('Mic Start')
     }
     mic.onresult = event => {
       const transcript = Array.from(event.results)
         .map(result => result[0])
         .map(result => result.transcript)
         .join('')
-      output_transcript = transcript
-      output_result = transcript
+      outputTranscript = transcript
+      outputResult = transcript
       mic.onerror = event => {
         console.log(event.error)
       }
     }
     mic.onend = () => {
       console.log('Mic Stop')
-      console.log('returning ----> ', output_transcript)
     }
     this.setState({isListening: false})
   }
 
   startProcessing = () => {
-    console.log('start processinggg...')
     this.setState({isProcessing: true})
     this.handleListen()
   }
 
   startVideo = () => {
     this.setState({isInitialized: true, isListening: true})
-    console.log('video starting up....')
     navigator.getUserMedia(
       {
         video: true
@@ -140,19 +169,16 @@ class VideoFeed extends Component {
   }
 
   stopVideo = () => {
-    console.log('attempting stop')
     audiostream.stop()
     if (videostream) {
       videostream.getTracks()[0].stop()
     }
     videostream = null
-    console.log('emotional breakdown', emotions)
     const totalEmotions = Object.values(emotions).reduce(
       (accum, curElm) => accum + curElm,
       0
     )
 
-    console.log('this is the results ---->', output_result)
     const emotionsPercentage = {
       sad: emotions.sad / totalEmotions,
       angry: emotions.angry / totalEmotions,
@@ -161,14 +187,10 @@ class VideoFeed extends Component {
       happy: emotions.happy / totalEmotions,
       disgusted: emotions.disgusted / totalEmotions,
       fearful: emotions.fearful / totalEmotions,
-      transcript: output_result
+      transcript: outputResult,
+      duration: this.state.recordingTime
     }
-    console.log('emotion percentage', emotionsPercentage)
-    console.log('emotion set?', this.state)
-
     this.props.setEmotion(emotionsPercentage)
-
-    console.log('this is the state --->', this.state)
     this.setState({
       isInitialized: false,
       isRecording: false,
@@ -180,9 +202,9 @@ class VideoFeed extends Component {
   onVideoPlay() {
     let self = this
     let count = 0
+    const dataTimer = 100
     let interval = setInterval(async function() {
       if (videostream) {
-        // console.log('running analysis')
         if (videostream.active === true) {
           const input = document.getElementsByClassName('videoFeed__video')[0]
           const results = await faceapi
@@ -203,7 +225,6 @@ class VideoFeed extends Component {
             }
           }
         }
-        // console.log(self.state)
       } else {
         clearInterval(interval)
       }
@@ -223,7 +244,10 @@ class VideoFeed extends Component {
               <h4 className="video__loading" />
             ) : null}
             {isProcessing ? (
-              <Countdown date={Date.now() + totalVideoTime} daysInHours={true}>
+              <Countdown
+                date={Date.now() + this.state.recordingTime}
+                daysInHours={true}
+              >
                 <Completion stopVideo={this.stopVideo} self={this} />
               </Countdown>
             ) : null}
@@ -253,13 +277,48 @@ class VideoFeed extends Component {
             }
           >
             {isInitialized && isRecording ? (
-              <button
-                type="button"
-                onClick={this.startProcessing}
-                disabled={!(isInitialized === true && isRecording === true)}
-              >
-                Start Recording <VideoCallIcon />
-              </button>
+              <>
+                {isProcessing ? null : (
+                  <>
+                    <button
+                      type="button"
+                      onClick={this.startProcessing}
+                      disabled={
+                        !(isInitialized === true && isRecording === true)
+                      }
+                    >
+                      Start Recording <VideoCallIcon />
+                    </button>
+                    <div className="recording__time__input">
+                      <Paper elevation={4}>
+                        <h4>Enter Desired Recording Time</h4>
+
+                        <div className="recording__input__fields">
+                          <input
+                            type="number"
+                            onChange={e => this.setRecordingTime(e, 'minutes')}
+                            min="0"
+                            max="99"
+                            placeholder="0"
+                            className="recording__time__minutes"
+                            defaultValue="0"
+                          />
+                          <label>Min</label>
+                          <input
+                            type="number"
+                            onChange={this.setRecordingTime}
+                            min="0"
+                            max="59"
+                            className="recording__time__seconds"
+                            defaultValue={this.state.recordingTime / 1000}
+                          />
+                          <label>Sec</label>
+                        </div>
+                      </Paper>
+                    </div>
+                  </>
+                )}
+              </>
             ) : (
               <div className="video__loading__div">
                 {isInitialized === false && isRecording === false ? (
@@ -280,6 +339,7 @@ class VideoFeed extends Component {
 const mapState = () => {
   return {}
 }
+
 const mapDispatchToState = dispatch => {
   return {setEmotion: emotionObj => dispatch(setEmotionsInDb(emotionObj))}
 }

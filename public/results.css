@@ -123,3 +123,9 @@
   margin: 0;
   margin-top: 10px;
 }
+
+.no__pitches {
+  margin: 10px;
+  text-align: center;
+  color: white;
+}

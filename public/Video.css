@@ -88,6 +88,8 @@
 .video__bottom {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
 }
 
 .video__bottom__hidden {
@@ -178,4 +180,45 @@
 .video__loading__div > h4 {
   padding-top: 0;
   margin-top: 0;
+}
+
+.recording__time__input {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recording__time__input > input {
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: larger;
+}
+
+.recording__time__input > .MuiPaper-root {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.recording__time__input > .MuiPaper-root > h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.recording__input__fields {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recording__input__fields > input {
+  margin-right: 5px;
+  width: 75%;
+}
+
+.recording__input__fields > label {
+  margin-right: 15px;
 }

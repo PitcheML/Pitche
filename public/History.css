@@ -76,3 +76,10 @@
 .history__container > a > div:hover {
   transform: scale(1.02);
 }
+
+.no__pitches__history {
+  font-size: large;
+  margin: 10px;
+  text-align: center;
+  color: white;
+}
