@@ -12,8 +12,6 @@ class HistoryCard extends Component {
 
   getData() {
     const {emotion} = this.props
-    console.log('emotion', emotion)
-
     const data = [
       {name: 'Angry', value: emotion.angry},
       {name: 'Disgusted', value: emotion.disgusted},
@@ -38,6 +36,15 @@ class HistoryCard extends Component {
           <div className="history__card" key={emotion.id}>
             <h1>Speech #{emotion.id}</h1>
             <h2>{`${month}/${day}/${year}`}</h2>
+            <h2>
+              Length:{' '}
+              {emotion.duration / 1000 > 60
+                ? (emotion.duration / 1000 / 60).toFixed(2)
+                : (emotion.duration / 1000).toFixed(0)}
+              <span>
+                {emotion.duration / 1000 > 60 ? ' minutes' : ' seconds'}
+              </span>
+            </h2>
             {emotion.transcript ? (
               <h2>Word Count: {emotion.transcript.split(' ').length}</h2>
             ) : (
@@ -51,7 +58,7 @@ class HistoryCard extends Component {
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = {}
 

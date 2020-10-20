@@ -38,9 +38,17 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.props.history)
-    const emotions = this.props.emotion
-    let rawTranscript, splitTranscript, mostUsedWord, mostUsedCount, allMetrics
+    let rawTranscript,
+      splitTranscript,
+      mostUsedWord,
+      mostUsedCount,
+      allMetrics,
+      emotions,
+      recentResult
+    if (this.props.emotion) {
+      emotions = this.props.emotion
+      recentResult = emotions[emotions.length - 1]
+    }
     if (emotions.length > 0) {
       rawTranscript = emotions[emotions.length - 1].transcript
       splitTranscript = rawTranscript.split(' ')
@@ -125,12 +133,28 @@ class Results extends Component {
                         <Paper elevation={4}>
                           <h2>Speech Results:</h2>
                           <span>
+                            <p>
+                              Speech Length:{' '}
+                              {recentResult.duration / 1000 > 60
+                                ? (recentResult.duration / 1000 / 60).toFixed(2)
+                                : (recentResult.duration / 1000).toFixed(0)}
+                              <span>
+                                {recentResult.duration / 1000 > 60
+                                  ? ' minutes'
+                                  : ' seconds'}
+                              </span>
+                            </p>
+                          </span>
+                          <span>
                             <p>Word Count: {splitTranscript.length} words</p>
                           </span>
                           <span>
                             <p>
                               Vocal Speed:{' '}
-                              {(splitTranscript.length / 30).toFixed(2)}{' '}
+                              {(
+                                splitTranscript.length /
+                                (recentResult.duration / 1000)
+                              ).toFixed(2)}{' '}
                               words/second
                             </p>
                           </span>

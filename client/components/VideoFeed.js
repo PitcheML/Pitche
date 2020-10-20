@@ -68,8 +68,6 @@ class VideoFeed extends Component {
 
   setRecordingTime(evt, type = 'seconds') {
     evt.preventDefault()
-
-    // console.log('this is the type ===> ', type)
     if (type === 'minutes') {
       let newVideoTime = evt.target.value
       newVideoTime = newVideoTime * 60 * 1000
@@ -78,9 +76,6 @@ class VideoFeed extends Component {
       )[0].value
       seconds *= 1000
       newVideoTime += seconds
-
-      console.log('newvideotime =====> ', newVideoTime)
-
       this.setState({
         recordingTime: newVideoTime
       })
@@ -290,8 +285,10 @@ class VideoFeed extends Component {
                       Start Recording <VideoCallIcon />
                     </button>
                     <div className="recording__time__input">
-                      <Paper elevation={4}>
-                        <h4>Enter Desired Recording Time</h4>
+                      <Paper elevation={4} id="recording__time__box">
+                        <h4 className="recording__header">
+                          Enter Desired Recording Time
+                        </h4>
 
                         <div className="recording__input__fields">
                           <input
