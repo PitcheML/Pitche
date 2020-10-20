@@ -38,7 +38,9 @@ const AuthForm = props => {
               </button>
             </div>
             <div className="auth__oauth">
-              <a href="/auth/google">{/* <GoogleButton type="dark" /> */}</a>
+              <a href="/auth/google">
+                <GoogleButton type="dark" />
+              </a>
             </div>
           </form>
         </div>
