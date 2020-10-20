@@ -109,7 +109,6 @@
   background-color: gray;
   border: none;
   border-radius: 10px;
-  /* box-shadow: 1px 2px lightgray; */
   outline-width: 0;
 }
 
@@ -128,6 +127,7 @@
   border-radius: 10px;
   box-shadow: 2px 2px lightgray;
   outline-width: 0;
+  font-size: large;
 }
 
 .video__bottom > button > .MuiSvgIcon-root {
@@ -221,6 +221,15 @@
 
 .recording__input__fields > label {
   margin-right: 15px;
+  color: white;
+}
+
+.recording__header {
+  color: white;
+}
+
+#recording__time__box {
+  background-color: blue;
 }
 .results__input {
   display: flex;

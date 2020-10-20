@@ -123,12 +123,28 @@ class SinglePitch extends Component {
                         <Paper elevation={4}>
                           <h2>Speech Results:</h2>
                           <span>
+                            <p>
+                              Speech Length:{' '}
+                              {pitch.duration / 1000 > 60
+                                ? (pitch.duration / 1000 / 60).toFixed(2)
+                                : (pitch.duration / 1000).toFixed(0)}
+                              <span>
+                                {pitch.duration / 1000 > 60
+                                  ? ' minutes'
+                                  : ' seconds'}
+                              </span>
+                            </p>
+                          </span>
+                          <span>
                             <p>Word Count: {splitTranscript.length} words</p>
                           </span>
                           <span>
                             <p>
                               Vocal Speed:{' '}
-                              {(splitTranscript.length / 30).toFixed(2)}{' '}
+                              {(
+                                splitTranscript.length /
+                                (pitch.duration / 1000)
+                              ).toFixed(2)}{' '}
                               words/second
                             </p>
                           </span>
