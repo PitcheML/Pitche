@@ -4,6 +4,8 @@ import {fetchPitch} from '../store/singlePitch'
 import Paper from '@material-ui/core/Paper'
 import TwoLevelPieChart from './TwoLevelPieChart'
 import {deleteEmotionFromDB} from '../store/emotion'
+import {Button} from '@material-ui/core'
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver'
 
 class SinglePitch extends Component {
   constructor() {
@@ -169,9 +171,19 @@ class SinglePitch extends Component {
                 </div>
               </div>
             </Paper>
-            <button type="submit" onClick={this.handleClick}>
-              Delete this Pitch and Record Again
-            </button>
+            <div className="results__input__sp">
+              <Paper>
+                <Button
+                  type="submit"
+                  onClick={this.handleClick}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Delete ✖︎ <span className="results__amp">&</span> Re-Record{' '}
+                  <RecordVoiceOverIcon />
+                </Button>
+              </Paper>
+            </div>
           </React.Fragment>
         ) : (
           <h4 className="no__pitches">
