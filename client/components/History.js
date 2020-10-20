@@ -18,7 +18,10 @@ class History extends Component {
               return <HistoryCard key={emotion.id} emotion={emotion} />
             })
           ) : (
-            <h4>None</h4>
+            <h4 className="no__pitches__history">
+              Your pitches and resulting analysis will render here once they are
+              recorded.
+            </h4>
           )}
         </div>
       </div>

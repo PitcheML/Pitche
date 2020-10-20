@@ -163,7 +163,9 @@ class SinglePitch extends Component {
             </Paper>
           </React.Fragment>
         ) : (
-          <h4>none</h4>
+          <h4 className="no__pitches">
+            You do not have any pitches yet, click above to record one!
+          </h4>
         )}
       </div>
     )

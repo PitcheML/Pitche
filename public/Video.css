@@ -88,6 +88,8 @@
 .video__bottom {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column-reverse;
 }
 
 .video__bottom__hidden {
@@ -178,4 +180,19 @@
 .video__loading__div > h4 {
   padding-top: 0;
   margin-top: 0;
+}
+
+.recording__time__input {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.recording__time__input > input {
+  width: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: larger;
 }
