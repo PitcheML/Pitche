@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GET_EMOTIONS = 'GET_EMOTIONS'
 const SET_EMOTIONS = 'SET_EMOTIONS'
+const DELETE_EMOTION = 'DELETE_EMOTION'
 
 /**
  * INITIAL STATE
@@ -16,6 +17,7 @@ const emotions = []
  */
 const getEmotions = emotion => ({type: GET_EMOTIONS, emotion})
 const setEmotions = emotion => ({type: SET_EMOTIONS, emotion})
+const deleteEmotion = emotionId => ({type: DELETE_EMOTION, emotionId})
 
 /**
  * THUNK CREATORS
@@ -39,6 +41,16 @@ export const setEmotionsInDb = emotionObj => async dispatch => {
   }
 }
 
+export const deleteEmotionFromDB = emotionId => async dispatch => {
+  try {
+    await axios.delete(`/api/history/${emotionId}`)
+
+    dispatch(deleteEmotion(emotionId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -48,6 +60,8 @@ export default function(state = emotions, action) {
       return action.emotion
     case SET_EMOTIONS:
       return [...state, action.emotion]
+    case DELETE_EMOTION:
+      return [...state].filter(emotion => action.emotionId !== emotion.id)
     default:
       return state
   }

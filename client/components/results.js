@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchEmotions} from '../store/emotion'
+import {fetchEmotions, deleteEmotionFromDB} from '../store/emotion'
 import Paper from '@material-ui/core/Paper'
 import TwoLevelPieChart from './TwoLevelPieChart'
 
@@ -8,6 +8,18 @@ class Results extends Component {
   constructor() {
     super()
     this.getData = this.getData.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.reroute = this.reroute.bind(this)
+  }
+
+  handleClick() {
+    const emotions = this.props.emotion
+    const emotionId = emotions[emotions.length - 1].id
+    this.props.deleteEmotion(emotionId)
+    this.props.history.push('/video')
+  }
+  reroute() {
+    this.props.history.push('/history')
   }
 
   getData() {
@@ -26,6 +38,7 @@ class Results extends Component {
   }
 
   render() {
+    console.log(this.props.history)
     const emotions = this.props.emotion
     let rawTranscript, splitTranscript, mostUsedWord, mostUsedCount, allMetrics
     if (emotions.length > 0) {
@@ -160,6 +173,12 @@ class Results extends Component {
                 </div>
               </div>
             </Paper>
+            <button type="submit" onClick={this.reroute}>
+              Save this Pitch
+            </button>
+            <button type="submit" onClick={this.handleClick}>
+              Delete this Pitch and Record Again
+            </button>
           </React.Fragment>
         ) : (
           <h4>none</h4>
@@ -177,7 +196,8 @@ const mapState = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getEmotions: () => dispatch(fetchEmotions())
+    getEmotions: () => dispatch(fetchEmotions()),
+    deleteEmotion: emotionId => dispatch(deleteEmotionFromDB(emotionId))
   }
 }
 

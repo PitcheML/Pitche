@@ -3,14 +3,22 @@ import {connect} from 'react-redux'
 import {fetchPitch} from '../store/singlePitch'
 import Paper from '@material-ui/core/Paper'
 import TwoLevelPieChart from './TwoLevelPieChart'
+import {deleteEmotionFromDB} from '../store/emotion'
 
 class SinglePitch extends Component {
   constructor() {
     super()
     this.getData = this.getData.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
   async componentDidMount() {
     await this.props.getPitch(this.props.match.params.pitchId)
+  }
+
+  handleClick() {
+    console.log(this.props)
+    this.props.deleteEmotion(this.props.pitch.id)
+    this.props.history.push('/history')
   }
 
   getData() {
@@ -161,6 +169,9 @@ class SinglePitch extends Component {
                 </div>
               </div>
             </Paper>
+            <button type="submit" onClick={this.handleClick}>
+              Delete this Pitch and Record Again
+            </button>
           </React.Fragment>
         ) : (
           <h4>none</h4>
@@ -178,7 +189,8 @@ const mapState = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPitch: pitchId => dispatch(fetchPitch(pitchId))
+    getPitch: pitchId => dispatch(fetchPitch(pitchId)),
+    deleteEmotion: emotionId => dispatch(deleteEmotionFromDB(emotionId))
   }
 }
 

@@ -34,3 +34,13 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:emotionId', async (req, res, next) => {
+  try {
+    const emotion = await Emotion.findByPk(req.params.emotionId)
+    await emotion.destroy()
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
