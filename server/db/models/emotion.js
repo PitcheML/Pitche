@@ -25,6 +25,10 @@ const Emotion = db.define('emotion', {
   },
   transcript: {
     type: Sequelize.TEXT
+  },
+  duration: {
+    type: Sequelize.INTEGER,
+    defaultValue: 30000
   }
 })
 

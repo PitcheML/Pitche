@@ -1,10 +1,11 @@
+/* eslint-disable complexity */
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as faceapi from 'face-api.js'
 import {setEmotionsInDb} from '../store/emotion'
 import Countdown from 'react-countdown'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
-import {LinearProgress} from '@material-ui/core'
+import {LinearProgress, Paper} from '@material-ui/core'
 
 const emotions = {
   sad: 0,
@@ -65,14 +66,40 @@ class VideoFeed extends Component {
     }
   }
 
-  setRecordingTime(evt) {
+  setRecordingTime(evt, type = 'seconds') {
     evt.preventDefault()
-    let newVideoTime = evt.target.value
-    newVideoTime *= 1000
-    this.setState({
-      recordingTime: newVideoTime
-    })
-    evt.target.value = ''
+
+    // console.log('this is the type ===> ', type)
+    if (type === 'minutes') {
+      let newVideoTime = evt.target.value
+      newVideoTime = newVideoTime * 60 * 1000
+      let seconds = document.getElementsByClassName(
+        'recording__time__seconds'
+      )[0].value
+      seconds *= 1000
+      newVideoTime += seconds
+
+      console.log('newvideotime =====> ', newVideoTime)
+
+      this.setState({
+        recordingTime: newVideoTime
+      })
+    } else {
+      let newVideoTime = evt.target.value
+      newVideoTime *= 1000
+
+      let minutes = document.getElementsByClassName(
+        'recording__time__minutes'
+      )[0].value
+      minutes = minutes * 60 * 1000
+      newVideoTime += minutes
+
+      console.log('newvideotime =====> ', newVideoTime)
+
+      this.setState({
+        recordingTime: newVideoTime
+      })
+    }
   }
 
   handleListen = () => {
@@ -89,14 +116,14 @@ class VideoFeed extends Component {
 
     if (isListening) {
       mic.start()
-      mic.onend = () => {
-        mic.start()
-      }
+      // mic.onend = () => {
+      //   mic.start()
+      // }
     } else {
       mic.stop()
-      mic.onend = () => {
-        console.log('Mic Stop')
-      }
+      // mic.onend = () => {
+      //   console.log('Mic Stop')
+      // }
     }
     mic.onstart = () => {
       console.log('Mic Start')
@@ -160,7 +187,8 @@ class VideoFeed extends Component {
       happy: emotions.happy / totalEmotions,
       disgusted: emotions.disgusted / totalEmotions,
       fearful: emotions.fearful / totalEmotions,
-      transcript: outputResult
+      transcript: outputResult,
+      duration: this.state.recordingTime
     }
     this.props.setEmotion(emotionsPercentage)
     this.setState({
@@ -250,22 +278,45 @@ class VideoFeed extends Component {
           >
             {isInitialized && isRecording ? (
               <>
-                <button
-                  type="button"
-                  onClick={this.startProcessing}
-                  disabled={!(isInitialized === true && isRecording === true)}
-                >
-                  Start Recording <VideoCallIcon />
-                </button>
                 {isProcessing ? null : (
-                  <div className="recording__time__input">
-                    <h4>Enter Desired Recording Time (seconds)</h4>
-                    <input
-                      type="text"
-                      onChange={this.setRecordingTime}
-                      value={this.state.recordingTime / 1000}
-                    />
-                  </div>
+                  <>
+                    <button
+                      type="button"
+                      onClick={this.startProcessing}
+                      disabled={
+                        !(isInitialized === true && isRecording === true)
+                      }
+                    >
+                      Start Recording <VideoCallIcon />
+                    </button>
+                    <div className="recording__time__input">
+                      <Paper elevation={4}>
+                        <h4>Enter Desired Recording Time</h4>
+
+                        <div className="recording__input__fields">
+                          <input
+                            type="number"
+                            onChange={e => this.setRecordingTime(e, 'minutes')}
+                            min="0"
+                            max="99"
+                            placeholder="0"
+                            className="recording__time__minutes"
+                            defaultValue="0"
+                          />
+                          <label>Min</label>
+                          <input
+                            type="number"
+                            onChange={this.setRecordingTime}
+                            min="0"
+                            max="59"
+                            className="recording__time__seconds"
+                            defaultValue={this.state.recordingTime / 1000}
+                          />
+                          <label>Sec</label>
+                        </div>
+                      </Paper>
+                    </div>
+                  </>
                 )}
               </>
             ) : (

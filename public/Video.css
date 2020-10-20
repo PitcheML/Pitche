@@ -196,3 +196,29 @@
   text-align: center;
   font-size: larger;
 }
+
+.recording__time__input > .MuiPaper-root {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.recording__time__input > .MuiPaper-root > h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.recording__input__fields {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recording__input__fields > input {
+  margin-right: 5px;
+  width: 75%;
+}
+
+.recording__input__fields > label {
+  margin-right: 15px;
+}
