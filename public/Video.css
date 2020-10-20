@@ -222,3 +222,46 @@
 .recording__input__fields > label {
   margin-right: 15px;
 }
+.results__input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results__input > .MuiPaper-root {
+  margin-top: 15px;
+  padding: 10px;
+  width: 500px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.results__amp {
+  font-size: smaller;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.results__input > .MuiPaper-root > button > span > .MuiSvgIcon-root {
+  font-size: large;
+  margin-left: 5px;
+}
+
+.results__input__sp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results__input__sp > .MuiPaper-root {
+  margin-top: 15px;
+  padding: 10px;
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.results__input__sp > .MuiPaper-root > button > span > .MuiSvgIcon-root {
+  font-size: large;
+  margin-left: 5px;
+}

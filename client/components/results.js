@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {fetchEmotions, deleteEmotionFromDB} from '../store/emotion'
 import Paper from '@material-ui/core/Paper'
 import TwoLevelPieChart from './TwoLevelPieChart'
+import {Button} from '@material-ui/core'
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver'
 
 class Results extends Component {
   constructor() {
@@ -173,12 +175,27 @@ class Results extends Component {
                 </div>
               </div>
             </Paper>
-            <button type="submit" onClick={this.reroute}>
-              Save this Pitch
-            </button>
-            <button type="submit" onClick={this.handleClick}>
-              Delete this Pitch and Record Again
-            </button>
+            <div className="results__input">
+              <Paper>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  onClick={this.handleClick}
+                >
+                  Delete ✖︎ <span className="results__amp">&</span> Re-Record{' '}
+                  <RecordVoiceOverIcon />
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  onClick={this.reroute}
+                >
+                  Save this Pitch ✔︎
+                </Button>
+              </Paper>
+            </div>
           </React.Fragment>
         ) : (
           <h4 className="no__pitches">
