@@ -33,23 +33,21 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/video" component={VideoFeed} />
-        <Route path="/results" component={Results} />
-        <Route exact path="/history" component={History} />
-        <Route path="/history/:pitchId" component={SinglePitch} />
-        <Route path="/account" component={UserAccount} />
-        <Route exact path="/">
-          {' '}
-          <Redirect to="/home" />
-        </Route>
 
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/video" component={VideoFeed} />
+            <Route path="/results" component={Results} />
+            <Route exact path="/history" component={History} />
+            <Route path="/history/:pitchId" component={SinglePitch} />
+            <Route path="/account" component={UserAccount} />
+            <Route exact path="/" component={UserHome} />
+            <Route render={() => <Redirect to={{pathname: '/'}} />} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
+
         <Route component={Login} />
       </Switch>
     )

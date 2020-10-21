@@ -264,12 +264,17 @@ class VideoFeed extends Component {
             ) : null}
           </div>
           <div className="video__right">
-            {isProcessing ? (
-              <h4>
-                REC <button type="button" className="rec" />
-              </h4>
-            ) : null}
+            {/* {isProcessing ? (
+                <h4>
+                  REC <button type="button" className="rec" />
+                </h4>
+              ) : null}{' '} */}
             <div className="video__container">
+              {isProcessing ? (
+                <h4>
+                  REC <button type="button" className="rec" />
+                </h4>
+              ) : null}{' '}
               <video
                 className="videoFeed__video"
                 autoPlay
