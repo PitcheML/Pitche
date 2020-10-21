@@ -5,6 +5,7 @@ import * as faceapi from 'face-api.js'
 import {setEmotionsInDb} from '../store/emotion'
 import Countdown from 'react-countdown'
 import VideoCallIcon from '@material-ui/icons/VideoCall'
+import StopIcon from '@material-ui/icons/Stop'
 import {LinearProgress, Paper} from '@material-ui/core'
 
 const emotions = {
@@ -40,6 +41,7 @@ class VideoFeed extends Component {
     this.stopVideo = this.stopVideo.bind(this)
     this.onVideoPlay = this.onVideoPlay.bind(this)
     this.setRecordingTime = this.setRecordingTime.bind(this)
+    this.stopVideoEarly = this.stopVideoEarly.bind(this)
   }
 
   async componentDidMount() {
@@ -145,6 +147,12 @@ class VideoFeed extends Component {
     this.handleListen()
   }
 
+  stopVideoEarly = () => {
+    const dontSave = 'dontSave'
+    this.stopVideo(dontSave)
+    this.props.history.push('/home')
+  }
+
   startVideo = () => {
     this.setState({isInitialized: true, isListening: true})
     navigator.getUserMedia(
@@ -163,7 +171,7 @@ class VideoFeed extends Component {
     console.log('video has loaded....')
   }
 
-  stopVideo = () => {
+  stopVideo = (dontSave = null) => {
     audiostream.stop()
     if (videostream) {
       videostream.getTracks()[0].stop()
@@ -185,7 +193,11 @@ class VideoFeed extends Component {
       transcript: outputResult,
       duration: this.state.recordingTime
     }
-    this.props.setEmotion(emotionsPercentage)
+
+    if (!dontSave) {
+      this.props.setEmotion(emotionsPercentage)
+    }
+
     this.setState({
       isInitialized: false,
       isRecording: false,
@@ -236,15 +248,19 @@ class VideoFeed extends Component {
         <div className="video">
           <div className="video__left">
             {isInitialized && isRecording === false ? (
-              <h4 className="video__loading" />
+              <div className="video__loading" />
             ) : null}
             {isProcessing ? (
-              <Countdown
-                date={Date.now() + this.state.recordingTime}
-                daysInHours={true}
-              >
-                <Completion stopVideo={this.stopVideo} self={this} />
-              </Countdown>
+              <div className="timer-container">
+                <h5>Time Remaining:</h5>
+                <Countdown
+                  id="countdown-timer"
+                  date={Date.now() + this.state.recordingTime}
+                  daysInHours={true}
+                >
+                  <Completion stopVideo={this.stopVideo} self={this} />
+                </Countdown>
+              </div>
             ) : null}
           </div>
           <div className="video__right">
@@ -276,6 +292,17 @@ class VideoFeed extends Component {
                 : 'video__bottom__hidden'
             }
           >
+            {isProcessing ? (
+              <div>
+                <button
+                  id="record-stop-btn"
+                  type="button"
+                  onClick={this.stopVideoEarly}
+                >
+                  Stop Recording <StopIcon />
+                </button>
+              </div>
+            ) : null}
             {isInitialized && isRecording ? (
               <>
                 {isProcessing ? null : (
