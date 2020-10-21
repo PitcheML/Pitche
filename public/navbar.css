@@ -1,3 +1,10 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 550px;
+}
+
 .navbar__container {
   display: flex;
   justify-content: space-between;
@@ -11,6 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .navbar__links > a {
@@ -22,7 +31,7 @@
 .navbar__links > a > .MuiSvgIcon-root {
   margin-left: 6px;
   font-size: 20px !important;
-  color: #3d52d5;
+  color: black;
 }
 
 .navbar__right__acc {
@@ -51,6 +60,63 @@
 
 .navbar__links__right > .MuiSvgIcon-root {
   font-size: 20px !important;
-  color: #3d52d5;
+  color: black;
   margin-right: 10px;
+}
+
+.navbar_links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar_links > img {
+  object-fit: contain;
+  height: 40px;
+  width: 150px;
+}
+
+.navbar__links:hover {
+  border-bottom: 1px solid #000;
+}
+
+.navbar__links:hover > a {
+  color: #3d52d5;
+}
+
+.navbar__links:hover > a > .MuiSvgIcon-root {
+  color: #3d52d5 !important;
+}
+
+@media only screen and (min-width: 900px) {
+  .navbar__left--responsive {
+    display: none;
+  }
+  .navbar__right--responsive {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .navbar__left {
+    display: none;
+  }
+
+  .navbar__right {
+    display: none;
+  }
+
+  .navbar__left--responsive {
+    display: flex;
+  }
+
+  .navbar__right--responsive {
+    display: flex;
+    border-left: 1px solid lightgray;
+    margin: 2px;
+  }
+
+  .navbar__links__right > a > .MuiSvgIcon-root {
+    color: black;
+  }
 }
