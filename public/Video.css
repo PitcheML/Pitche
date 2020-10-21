@@ -311,7 +311,6 @@
   margin-left: 5px;
 }
 
-
 .recording__time__seconds {
   text-align: center;
 }
@@ -340,6 +339,7 @@
   margin-bottom: 10px;
   border-radius: 10px;
   padding: 10px;
+}
 
 .video__container > h4 {
   position: absolute;
@@ -367,5 +367,4 @@
   justify-content: flex-end;
   justify-items: center;
   align-items: center;
-
 }
