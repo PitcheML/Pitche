@@ -60,7 +60,7 @@
 
 .navbar__links__right > .MuiSvgIcon-root {
   font-size: 20px !important;
-  color: #3d52d5;
+  color: black;
   margin-right: 10px;
 }
 
@@ -78,6 +78,10 @@
 
 .navbar__links:hover {
   border-bottom: 1px solid #000;
+}
+
+.navbar__links:hover > a {
+  color: #3d52d5;
 }
 
 .navbar__links:hover > a > .MuiSvgIcon-root {

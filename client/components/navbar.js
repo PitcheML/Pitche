@@ -95,8 +95,11 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
       ) : (
         <div className="navbar__left">
           {/* The navbar will show these links before you log in */}
+          <div className="navbar_links">
+            <img id="pitche-logo" src="logo.png" alt="" />
+          </div>
+
           <div className="navbar__links">
-            <img id="pitche-logo" src="Plogo.png" alt="" width="40" />
             <Link to="/login">
               Login
               <MeetingRoomIcon />

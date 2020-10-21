@@ -38,10 +38,8 @@ class Routes extends Component {
         <Route exact path="/history" component={History} />
         <Route path="/history/:pitchId" component={SinglePitch} />
         <Route path="/account" component={UserAccount} />
-        <Route exact path="/">
-          {' '}
-          <Redirect to="/home" />
-        </Route>
+        <Route exact path="/" component={UserHome} />
+        <Route render={() => <Redirect to={{pathname: '/'}} />} />
 
         {isLoggedIn && (
           <Switch>
