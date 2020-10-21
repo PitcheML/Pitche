@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  color: white;
+  color: black;
 }
 
 .video__loading {
@@ -130,6 +130,34 @@
   font-size: large;
 }
 
+#record-stop-btn {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  width: 250px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  background-color: #f93943;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px lightgray;
+  outline-width: 0;
+  font-size: large;
+}
+
+#record-stop-btn:hover {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#962127, 0);
+}
+
+.video__bottom > button:hover {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#962127, 0);
+}
+
 .video__bottom > button > .MuiSvgIcon-root {
   margin-left: 4px;
 }
@@ -167,6 +195,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
 }
 
 .video__loading__div > .MuiLinearProgress-root {
@@ -194,6 +223,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
+  justify-content: center;
   font-size: larger;
 }
 
@@ -230,7 +260,9 @@
 
 #recording__time__box {
   background-color: blue;
+  box-shadow: 2px 2px lightgray;
 }
+
 .results__input {
   display: flex;
   justify-content: center;
@@ -273,4 +305,34 @@
 .results__input__sp > .MuiPaper-root > button > span > .MuiSvgIcon-root {
   font-size: large;
   margin-left: 5px;
+}
+
+.recording__time__seconds {
+  text-align: center;
+}
+
+.recording__time__minutes {
+  text-align: center;
+}
+
+#countdown-timer {
+  color: black;
+}
+
+.timer-container > h5 {
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.timer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4px black;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 10px;
 }
