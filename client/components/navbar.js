@@ -10,6 +10,7 @@ import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import CreateIcon from '@material-ui/icons/Create'
+import DonutLargeIcon from '@material-ui/icons/DonutLarge'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="navbar">
@@ -17,11 +18,10 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
       {isLoggedIn ? (
         <div className="navbar__container">
           {/* The navbar will show these links after you log in */}
-
+          <div className="navbar_links">
+            <img id="pitche-logo" src="logo.png" alt="" />
+          </div>
           <div className="navbar__left">
-            <div className="navbar_links">
-              <img id="pitche-logo" src="Plogo.png" alt="" width="40" />
-            </div>
             <div className="navbar__links">
               <Link to="/home">
                 Home <HomeIcon />
@@ -34,7 +34,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
             </div>
             <div className="navbar__links">
               <Link to="/results">
-                Last Pitch Analysis <AssessmentIcon />
+                Last Pitch Analysis <DonutLargeIcon />
               </Link>
             </div>
             <div className="navbar__links">
@@ -43,6 +43,29 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
               </Link>
             </div>
           </div>
+          <div className="navbar__left--responsive">
+            <div className="navbar__links">
+              <Link to="/home">
+                <HomeIcon />
+              </Link>
+            </div>
+            <div className="navbar__links">
+              <Link to="/video">
+                <RecordVoiceOverIcon />
+              </Link>
+            </div>
+            <div className="navbar__links">
+              <Link to="/results">
+                <DonutLargeIcon />
+              </Link>
+            </div>
+            <div className="navbar__links">
+              <Link to="/history">
+                <AssessmentIcon />
+              </Link>
+            </div>
+          </div>
+
           <div className="navbar__right">
             <div className="navbar__right__acc">
               <Avatar src={user.imgUrl} />
@@ -53,6 +76,19 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
                 Logout
               </a>
               <ExitToAppIcon />
+            </div>
+          </div>
+
+          <div className="navbar__right--responsive">
+            <div className="navbar__right__acc">
+              <Link to="/account">
+                <Avatar src={user.imgUrl} />
+              </Link>
+            </div>
+            <div className="navbar__links__right">
+              <a href="#" onClick={handleClick}>
+                <ExitToAppIcon />
+              </a>
             </div>
           </div>
         </div>
@@ -76,7 +112,6 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
         </div>
       )}
     </nav>
-    <hr />
   </div>
 )
 
