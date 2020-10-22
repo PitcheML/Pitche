@@ -1,13 +1,6 @@
 import React, {PureComponent} from 'react'
 import {PieChart, Pie, Sector, Cell} from 'recharts'
 
-const data = [
-  {name: 'Group A', value: 400},
-  {name: 'Group B', value: 300},
-  {name: 'Group C', value: 300},
-  {name: 'Group D', value: 200}
-]
-
 const COLORS = [
   '#060760',
   '#090C9B',
@@ -94,7 +87,7 @@ const renderActiveShape = props => {
 
 export default class Example extends PureComponent {
   state = {
-    activeIndex: 0
+    activeIndex: 4
   }
 
   onPieEnter = (data, index) => {
