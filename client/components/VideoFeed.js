@@ -160,7 +160,6 @@ class VideoFeed extends Component {
       },
       err => console.error(err)
     )
-    console.log('video has loaded....')
   }
 
   stopVideo = (dontSave = null) => {

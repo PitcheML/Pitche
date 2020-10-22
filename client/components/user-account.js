@@ -153,10 +153,6 @@ class UserAccount extends Component {
                 return (
                   <>
                     <HistoryCard key={invEmo.id} emotion={invEmo} />
-                    <HistoryCard key={invEmo.id} emotion={invEmo} />
-                    <HistoryCard key={invEmo.id} emotion={invEmo} />
-                    <HistoryCard key={invEmo.id} emotion={invEmo} />
-                    <HistoryCard key={invEmo.id} emotion={invEmo} />
                   </>
                 )
               })
