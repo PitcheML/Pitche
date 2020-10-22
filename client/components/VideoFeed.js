@@ -356,6 +356,7 @@ class VideoFeed extends Component {
     )
   }
 }
+
 const mapState = () => {
   return {}
 }
