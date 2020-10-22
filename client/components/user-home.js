@@ -50,8 +50,8 @@ export const UserHome = props => {
       <div className="userHome__container">
         <div className="userHome__top">
           <div className="userHome__top__left">
-            <h4>Welcome back, {user.email}!</h4>
             <Avatar src={user.imgUrl} />
+            <h4>Welcome back, {user.email}!</h4>
           </div>
         </div>
         <div
@@ -60,7 +60,14 @@ export const UserHome = props => {
           }
         >
           {emotion.length > 0 ? (
-            emotion.map(emo => <HistoryCard key={emo.id} emotion={emo} />)
+            emotion.map(emo => (
+              <>
+                <HistoryCard key={emo.id} emotion={emo} />
+                <HistoryCard key={emo.id} emotion={emo} />
+                <HistoryCard key={emo.id} emotion={emo} />
+                <HistoryCard key={emo.id} emotion={emo} />
+              </>
+            ))
           ) : (
             <>
               <h4>You don't have any recorded pitches... let's change that!</h4>

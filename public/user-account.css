@@ -1,22 +1,26 @@
 .userAccount {
-  color: black;
+  border-radius: 10px;
 }
 
 .userAccount__container {
-  border: 1px solid #000;
-  background-color: white;
-  height: 675px;
+  background-color: #dadce7;
+  height: 750px;
   margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .userAccount__container__top {
   display: flex;
   height: 200px;
-  width: 100%;
+  width: 90%;
 }
 
 .userAccount__left {
-  border: 1px solid #000;
+  padding: 10px;
   border-right: 0px;
   width: auto;
   flex: 0.4;
@@ -24,11 +28,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-bottom: 1px solid #f9f9f9;
 }
 
 .userAccount__left > .MuiAvatar-root {
   width: 100px;
   height: 100px;
+  border: 1px solid lightgray;
 }
 
 .userAccount__left > h1 {
@@ -38,13 +44,14 @@
 }
 
 .userAccount__middle {
-  border: 1px solid #000;
-  width: auto;
+  width: 90%;
   flex: 0.6;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-left: 2px solid #f9f9f9;
+  border-bottom: 1px solid #f9f9f9;
 }
 
 .userAccount__pw > div {
@@ -93,10 +100,17 @@
 }
 
 .userAccount__container__bottom {
+  padding-top: 10px;
   display: flex;
+  flex-wrap: wrap;
   overflow-y: scroll;
-  overflow-x: scroll;
-  max-height: 675px;
+  justify-content: center;
+  align-items: center;
+  height: 530px;
+}
+
+.userAccount__container__bottom::-webkit-scrollbar {
+  display: none;
 }
 
 /* .userAccount__container__bottom::-webkit-scrollbar {
@@ -111,21 +125,44 @@
 .file__uploader {
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   margin-right: 10px;
   padding-right: 25px;
   margin-left: 25px;
+  margin-top: 3px;
 }
 
 .file__uploader > input {
+  margin-top: 2px;
   position: relative;
   border: 1px solid gray;
-  margin-top: 24px;
+  border-radius: 2px;
+  background: white;
+  height: 20px;
 }
 
-.file__uploader > div {
-  margin: 15px;
+/* .file__uploader > div {
+  margin: 10px;
+  margin-bottom: 15px;
+} */
+
+.upload {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.upload > button {
+  margin-top: 10px;
+}
+
+.file__uploader > button {
+  margin-top: 10px;
+  width: 70px;
 }
 
 .userAccount__noResults {
@@ -138,7 +175,7 @@
   padding-bottom: 50px;
 }
 
-.userAccount__noResults:hover > .MuiButton-root {
+.user .userAccount__noResults:hover > .MuiButton-root {
   transform: scale(1.03);
   background-color: red;
   color: white;

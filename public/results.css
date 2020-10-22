@@ -1,9 +1,11 @@
 .results {
+  margin-top: 20px;
   padding: 20px;
   padding-top: 0px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   height: 400px;
+  border-radius: 10px;
 }
 
 .results > .MuiPaper-rounded {
@@ -12,7 +14,8 @@
 
 .results__container {
   display: flex;
-  background-color: #f3f6f7;
+  background-color: #dadce7;
+  border-radius: 10px;
 }
 
 .results__container__left > .MuiPaper-root {

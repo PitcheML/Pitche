@@ -81,9 +81,16 @@ class UserAccount extends Component {
             <div className="userAccount__middle">
               <div className="middle__top">
                 <form onSubmit={this.handleUpload} className="file__uploader">
+                  <label>
+                    <small>Change Profile Image</small>
+                  </label>
                   <input type="file" onChange={this.onFileChange} />
                   <div />
-                  <button type="submit">Upload</button>
+                  <div className="upload">
+                    <Button variant="contained" color="primary" type="submit">
+                      Upload
+                    </Button>
+                  </div>
                 </form>
                 <form
                   onSubmit={this.changeEmail}
@@ -102,7 +109,9 @@ class UserAccount extends Component {
                       />
                     </div>
                     <div className="email__button">
-                      <button type="submit">Update Email</button>
+                      <Button variant="contained" color="primary" type="submit">
+                        Update Email
+                      </Button>
                     </div>
                   </div>
                 </form>
@@ -123,7 +132,9 @@ class UserAccount extends Component {
                       />
                     </div>
                     <div className="pw__button">
-                      <button type="submit">Update Password</button>
+                      <Button variant="contained" color="primary" type="submit">
+                        Update Password
+                      </Button>
                     </div>
                   </div>
                 </form>
@@ -141,6 +152,10 @@ class UserAccount extends Component {
               emotion.map(invEmo => {
                 return (
                   <>
+                    <HistoryCard key={invEmo.id} emotion={invEmo} />
+                    <HistoryCard key={invEmo.id} emotion={invEmo} />
+                    <HistoryCard key={invEmo.id} emotion={invEmo} />
+                    <HistoryCard key={invEmo.id} emotion={invEmo} />
                     <HistoryCard key={invEmo.id} emotion={invEmo} />
                   </>
                 )
