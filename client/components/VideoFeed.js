@@ -89,8 +89,6 @@ class VideoFeed extends Component {
       minutes = minutes * 60 * 1000
       newVideoTime += minutes
 
-      console.log('newvideotime =====> ', newVideoTime)
-
       this.setState({
         recordingTime: newVideoTime
       })
@@ -111,14 +109,8 @@ class VideoFeed extends Component {
 
     if (isListening) {
       mic.start()
-      // mic.onend = () => {
-      //   mic.start()
-      // }
     } else {
       mic.stop()
-      // mic.onend = () => {
-      //   console.log('Mic Stop')
-      // }
     }
     mic.onstart = () => {
       console.log('Mic Start')

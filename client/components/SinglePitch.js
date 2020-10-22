@@ -18,7 +18,6 @@ class SinglePitch extends Component {
   }
 
   handleClick() {
-    console.log(this.props)
     this.props.deleteEmotion(this.props.pitch.id)
     this.props.history.push('/history')
   }

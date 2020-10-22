@@ -34,7 +34,7 @@ export const fetchEmotions = () => async dispatch => {
 export const setEmotionsInDb = emotionObj => async dispatch => {
   try {
     const {data: emotion} = await axios.post('/api/history', emotionObj)
-    console.log('inside emotion thunk')
+
     dispatch(setEmotions(emotion))
   } catch (err) {
     console.error(err)
