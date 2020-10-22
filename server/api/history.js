@@ -16,8 +16,13 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:pitchId', async (req, res, next) => {
   try {
-    console.log('fired')
     const pitch = await Emotion.findByPk(req.params.pitchId)
+    //only user can view thier pitches
+    if (req.user.id !== pitch.userId) {
+      const error = new Error('You do not have access to this')
+      error.status = 401
+      throw error
+    }
     res.json(pitch)
   } catch (err) {
     next(err)
@@ -38,6 +43,12 @@ router.post('/', async (req, res, next) => {
 router.delete('/:emotionId', async (req, res, next) => {
   try {
     const emotion = await Emotion.findByPk(req.params.emotionId)
+    //only user can delete thier pitch
+    if (req.user.id !== emotion.userId) {
+      const error = new Error('You do not have access to this')
+      error.status = 401
+      throw error
+    }
     await emotion.destroy()
     res.sendStatus(204)
   } catch (error) {

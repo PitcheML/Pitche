@@ -20,7 +20,6 @@ import {fetchEmotions} from './store/emotion'
  */
 class Routes extends Component {
   componentDidMount() {
-    console.log('this is the props ---->', this.props)
     this.props.loadInitialData()
     this.props.getEmotions()
   }

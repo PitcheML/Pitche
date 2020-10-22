@@ -38,7 +38,6 @@ const renderCustomizedLabel = ({
 
 export default class SimplePieChart extends Component {
   render() {
-    console.log('our data', this.props.data)
     return (
       <PieChart width={200} height={300} onMouseEnter={this.onPieEnter}>
         <Pie

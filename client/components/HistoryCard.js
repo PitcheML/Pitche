@@ -29,7 +29,7 @@ class HistoryCard extends Component {
     const {createdAt} = emotion
     let date = createdAt.slice(0, createdAt.indexOf('T'))
     const [year, month, day] = date.split('-')
-    console.log(emotion)
+
     return (
       <Link to={`/history/${emotion.id}`}>
         <Paper elevation={4}>

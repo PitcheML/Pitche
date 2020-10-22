@@ -60,7 +60,6 @@ class UserAccount extends Component {
     const fileUploader = document.getElementsByClassName('file__uploader')[0]
     fileUploader.reset()
 
-    //console.log('these are the props ---->', this)
     this.props.updateUserImage(this.props.user.id, fileUrl)
   }
 
