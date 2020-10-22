@@ -11,6 +11,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import CreateIcon from '@material-ui/icons/Create'
 import DonutLargeIcon from '@material-ui/icons/DonutLarge'
+import PublishIcon from '@material-ui/icons/Publish'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="navbar">
@@ -42,6 +43,11 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
                 Pitch History <AssessmentIcon />
               </Link>
             </div>
+            <div className="navbar__links">
+              <Link to="/upload">
+                Upload A Pitch <PublishIcon />
+              </Link>
+            </div>
           </div>
           <div className="navbar__left--responsive">
             <div className="navbar__links">
@@ -62,6 +68,11 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
             <div className="navbar__links">
               <Link to="/history">
                 <AssessmentIcon />
+              </Link>
+            </div>
+            <div className="navbar__links">
+              <Link to="/upload">
+                <PublishIcon />
               </Link>
             </div>
           </div>

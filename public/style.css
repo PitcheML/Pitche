@@ -7,6 +7,7 @@
 @import 'user-account.css';
 @import 'user-home.css';
 @import 'tutorial.css';
+@import 'Upload.css';
 
 body {
   font-family: sans-serif;

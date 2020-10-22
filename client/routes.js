@@ -10,7 +10,8 @@ import {
   VideoFeed,
   History,
   SinglePitch,
-  UserAccount
+  UserAccount,
+  Upload
 } from './components'
 import {me} from './store'
 import {fetchEmotions} from './store/emotion'
@@ -41,6 +42,7 @@ class Routes extends Component {
             <Route exact path="/history" component={History} />
             <Route path="/history/:pitchId" component={SinglePitch} />
             <Route path="/account" component={UserAccount} />
+            <Route path="/upload" component={Upload} />
             <Route exact path="/" component={UserHome} />
             <Route render={() => <Redirect to={{pathname: '/'}} />} />
           </Switch>

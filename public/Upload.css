@@ -1,0 +1,26 @@
+.upload {
+  width: 100%;
+}
+
+.upload__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
+  margin-left: 20px;
+  width: 90%;
+  height: 500px;
+  background-color: white;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.upload__input {
+  margin-top: 10px;
+  display: flex;
+}
+
+.upload__input > button {
+  margin-right: 10px;
+}

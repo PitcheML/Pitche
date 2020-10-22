@@ -47,11 +47,13 @@
   width: 90%;
   flex: 0.6;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   border-left: 2px solid #f9f9f9;
   border-bottom: 1px solid #f9f9f9;
+  overflow-x: scroll;
 }
 
 .userAccount__pw > div {
@@ -135,7 +137,6 @@
 
 .file__uploader > input {
   margin-top: 2px;
-  position: relative;
   border: 1px solid gray;
   border-radius: 2px;
   background: white;
