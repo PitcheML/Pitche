@@ -63,9 +63,6 @@ export const UserHome = props => {
             emotion.map(emo => (
               <>
                 <HistoryCard key={emo.id} emotion={emo} />
-                <HistoryCard key={emo.id} emotion={emo} />
-                <HistoryCard key={emo.id} emotion={emo} />
-                <HistoryCard key={emo.id} emotion={emo} />
               </>
             ))
           ) : (
