@@ -83,3 +83,21 @@
   text-align: center;
   color: white;
 }
+
+.history__none {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.history__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}

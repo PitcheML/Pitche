@@ -222,9 +222,19 @@ class Results extends Component {
             </div>
           </React.Fragment>
         ) : (
-          <h4 className="no__pitches">
-            You do not have any pitches yet, click above to record one!
-          </h4>
+          <div className="history__wrapper">
+            <div className="history__none">
+              <h4>You don't have any recorded pitches... let's change that!</h4>
+              <h3>⬇</h3>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => this.props.history.push('/video')}
+              >
+                Record A New Pitch
+              </Button>
+            </div>
+          </div>
         )}
       </div>
     )
