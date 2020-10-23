@@ -1,3 +1,4 @@
+import {Button} from '@material-ui/core'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchEmotions} from '../store/emotion'
@@ -18,10 +19,40 @@ class History extends Component {
               return <HistoryCard key={emotion.id} emotion={emotion} />
             })
           ) : (
-            <h4 className="no__pitches__history">
-              Your pitches and resulting analysis will render here once they are
-              recorded.
-            </h4>
+            <div
+              className={
+                emotions.length > 0
+                  ? 'userHome__bottom__active'
+                  : 'userHome__bottom'
+              }
+            >
+              {emotions.length > 0 ? (
+                emotions.map(emo => (
+                  <>
+                    <HistoryCard key={emo.id} emotion={emo} />
+                  </>
+                ))
+              ) : (
+                <>
+                  <div className="history__wrapper">
+                    <div className="history__none">
+                      <h4>
+                        You don't have any recorded pitches... let's change
+                        that!
+                      </h4>
+                      <h3>⬇</h3>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => this.props.history.push('/video')}
+                      >
+                        Record A New Pitch
+                      </Button>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
           )}
         </div>
       </div>
